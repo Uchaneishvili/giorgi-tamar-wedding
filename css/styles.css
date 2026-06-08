@@ -246,3 +246,46 @@ section {
   color: var(--ink);
   margin: 24px 0;
 }
+
+/* Countdown section */
+.countdown { text-align: center; }
+.countdown__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .countdown__grid { grid-template-columns: repeat(4, 1fr); }
+}
+.countdown__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.countdown__value {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 9vw, 96px);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--ink);
+  display: inline-block;
+  perspective: 600px;
+  transition: transform 400ms var(--ease-out);
+  transform-style: preserve-3d;
+}
+.countdown__value.is-flipping {
+  animation: digit-flip 400ms var(--ease-out);
+}
+@keyframes digit-flip {
+  0%   { transform: rotateX(0deg);  }
+  50%  { transform: rotateX(90deg); }
+  51%  { transform: rotateX(-90deg); }
+  100% { transform: rotateX(0deg);  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .countdown__value.is-flipping { animation: none; }
+}
