@@ -33,7 +33,7 @@
   function tick() {
     const t = compute(Date.now());
     if (!els.days) return;
-    setValue(els.days,  pad(t.days, 3));
+    setValue(els.days,  String(t.days));
     setValue(els.hours, pad(t.hours, 2));
     setValue(els.mins,  pad(t.mins, 2));
     setValue(els.secs,  pad(t.secs, 2));
