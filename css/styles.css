@@ -232,3 +232,17 @@ section {
 @media (prefers-reduced-motion: reduce) {
   .loader__monogram { animation: none; opacity: 1; }
 }
+
+/* Welcome section */
+.welcome {
+  max-width: var(--read-max);
+  text-align: center;
+}
+.welcome__sentence {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(20px, 2.6vw, 28px);
+  line-height: 1.45;
+  color: var(--ink);
+  margin: 24px 0;
+}
