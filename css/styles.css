@@ -655,3 +655,67 @@ section {
 @media (prefers-reduced-motion: reduce) {
   .welcome__botanical { opacity: 0.85; transition: none; }
 }
+
+/* ─── Floral ornaments ──────────────────────────────────────────────────── */
+.ornament-fleuron {
+  display: block;
+  width: clamp(120px, 18vw, 180px);
+  height: auto;
+  margin: -40px auto clamp(56px, 8vw, 88px);
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 800ms var(--ease-out);
+}
+.ornament-fleuron.is-visible { opacity: 0.65; }
+@media (prefers-reduced-motion: reduce) {
+  .ornament-fleuron { opacity: 0.65; transition: none; }
+}
+
+/* Hero corner sprigs */
+.hero__sprig {
+  position: absolute;
+  width: clamp(60px, 9vw, 100px);
+  height: auto;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 1200ms var(--ease-out);
+  transition-delay: 600ms;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero__sprig--tl { top: 32px; left: 32px; }
+.hero__sprig--br {
+  bottom: 32px;
+  right: 32px;
+  transform: rotate(180deg);
+  transform-origin: center;
+}
+.hero.is-ready .hero__sprig { opacity: 0.5; }
+
+@media (max-width: 600px) {
+  .hero__sprig { width: 50px; }
+  .hero__sprig--tl { top: 20px; left: 20px; }
+  .hero__sprig--br { bottom: 20px; right: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__sprig { opacity: 0.5; transition: none; }
+}
+
+/* Footer crown with side branches */
+.footer__crown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2vw, 20px);
+}
+.footer__branch {
+  width: clamp(60px, 10vw, 96px);
+  height: auto;
+  color: var(--accent);
+  opacity: 0.55;
+}
+
+@media (max-width: 480px) {
+  .footer__branch { display: none; }
+}
