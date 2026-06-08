@@ -130,6 +130,31 @@ section {
 }
 
 /* Hero section */
+.hero__arch {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(260px, 60vw, 480px);
+  height: auto;
+  color: var(--accent);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 1200ms var(--ease-out);
+  transition-delay: 400ms;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero.is-ready .hero__arch { opacity: 0.4; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__arch { opacity: 0.4; transition: none; }
+}
+
+.hero__kicker,
+.hero__names,
+.hero__date,
+.hero__scrollhint { position: relative; z-index: 1; }
+
 .hero {
   min-height: 100vh;
   min-height: 100svh;
