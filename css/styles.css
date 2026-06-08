@@ -541,3 +541,47 @@ section {
 @media (prefers-reduced-motion: reduce) {
   .footer__monogram path { stroke-dashoffset: 0; transition: none; }
 }
+
+/* Music toggle */
+.music-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  opacity: 0.6;
+  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.music-toggle:hover,
+.music-toggle:focus-visible { opacity: 1; transform: scale(1.05); box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+.music-toggle__icon { width: 18px; height: 18px; }
+.music-toggle__icon--pause { display: none; }
+.music-toggle.is-playing .music-toggle__icon--play { display: none; }
+.music-toggle.is-playing .music-toggle__icon--pause { display: block; }
+
+.music-tooltip {
+  position: fixed;
+  top: 28px;
+  right: 76px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  padding: 8px 14px;
+  border-radius: 999px;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.music-tooltip.is-shown { opacity: 1; transform: translateX(0); }
