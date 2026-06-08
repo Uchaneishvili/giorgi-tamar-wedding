@@ -122,6 +122,89 @@ section {
   border-radius: 2px;
 }
 
+/* Hero section */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  max-width: none;
+  padding: 0 clamp(20px, 5vw, 48px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 24px;
+  position: relative;
+}
+.hero__kicker { margin: 0; opacity: 0; transform: translateY(8px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
+.hero__date   { margin: 0; opacity: 0; transform: translateY(8px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
+.hero.is-ready .hero__kicker,
+.hero.is-ready .hero__date { opacity: 1; transform: none; }
+.hero.is-ready .hero__kicker { transition-delay: 700ms; }
+.hero.is-ready .hero__date   { transition-delay: 900ms; }
+
+.hero__names {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(64px, 14vw, 180px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4px, 1vw, 12px);
+}
+.hero__amp {
+  font-style: italic;
+  color: var(--accent);
+  font-size: 0.55em;
+  line-height: 1;
+}
+.hero__name {
+  display: inline-block;
+  /* per-letter spans injected by JS */
+}
+.hero__name .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(8px);
+  will-change: opacity, transform;
+}
+.hero.is-ready .hero__name .char {
+  animation: char-in 600ms var(--ease-out) forwards;
+}
+
+@keyframes char-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero__scrollhint {
+  position: absolute;
+  bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink-soft);
+  opacity: 0;
+  transition: opacity 600ms var(--ease-out);
+  transition-delay: 1200ms;
+}
+.hero.is-ready .hero__scrollhint { opacity: 0.7; }
+.hero__line { width: 1px; height: 80px; background: var(--line); }
+.hero__scrollhint svg { animation: bob 1800ms ease-in-out infinite; }
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__name .char { opacity: 1 !important; transform: none !important; animation: none !important; }
+  .hero__scrollhint svg { animation: none; }
+}
+
 /* Loader overlay */
 .loader {
   position: fixed;
