@@ -1,31 +1,56 @@
 # Giorgi & Tamar — Wedding Invitation
 
-A single-page wedding invitation website for **გიორგი & თამარი**, 12 July 2026.
+A single-page wedding invitation site for **გიორგი & თამარი**, 12 ივლისი 2026.
 
-## Status
-
-Design phase. See [`docs/superpowers/specs/2026-06-08-wedding-invitation-design.md`](docs/superpowers/specs/2026-06-08-wedding-invitation-design.md) for the full spec.
+Live URL: _set after deploy_
 
 ## Stack
 
 - Vanilla HTML / CSS / JavaScript — no frameworks, no build step.
-- RSVP backend via Google Sheets + Google Apps Script Web App.
-- Designed mobile-first.
+- RSVP backend: Google Apps Script Web App → Google Sheet.
+- Hosting: any static host (Netlify, Vercel, Cloudflare Pages).
 
 ## Structure
 
 ```
-index.html              — the page
-css/                    — styles
-js/                     — countdown, RSVP, scroll reveal, music, cursor
-image/                  — photos and SVG assets
-audio/                  — background piano track
-google-apps-script/     — Apps Script deployment files
-docs/                   — design spec
+index.html              page
+css/                    styles + font imports
+js/                     countdown, RSVP, reveal, music, cursor, main
+image/                  monogram + story photos
+audio/                  ambient.mp3 (background music)
+google-apps-script/     Apps Script files + deploy README
+docs/superpowers/       design spec + implementation plan
 ```
 
-## Deployment
+## Local development
 
-1. Deploy the Apps Script (see `google-apps-script/README.md`) to get the Web App URL.
-2. Paste the URL into `js/rsvp.js` as the `APPS_SCRIPT_URL` constant.
-3. Push the folder to Netlify, Vercel, or any static host.
+```bash
+python3 -m http.server 8000
+# open http://localhost:8000
+```
+
+## Deployment checklist
+
+1. **RSVP backend.** Follow `google-apps-script/README.md` to deploy `Code.gs` as a Web App. Copy the `/exec` URL.
+2. **Wire URL.** Open `js/rsvp.js` and replace `__APPS_SCRIPT_URL__` with the URL.
+3. **Real photos.** Replace placeholder files `image/story-01.webp` through `image/story-04.webp` with the couple's photos (520×650 recommended, WebP preferred, < 100KB each).
+4. **Audio.** Drop the licensed piano track at `audio/ambient.mp3`.
+5. **Story copy.** Update each `.story__chapter` in `index.html` with real chapter titles + paragraphs.
+6. **RSVP deadline.** In `index.html`, find `.rsvp__sub` and replace `1 ივლისი 2026` with the chosen deadline.
+7. **Deploy.** Drag the project folder into Netlify Drop (https://app.netlify.com/drop) or `vercel --prod`.
+8. **Smoke test.** Open the deployed URL on mobile, submit a test RSVP, verify a row appears in the sheet.
+
+## Maintenance knobs
+
+| What | Where |
+| --- | --- |
+| Ceremony date/time | `js/countdown.js` — `TARGET` constant |
+| RSVP deadline copy | `index.html` — `.rsvp__sub` |
+| Apps Script URL | `js/rsvp.js` — `APPS_SCRIPT_URL` |
+| Background music volume | `js/music.js` — `TARGET_VOL` (default 0.3) |
+| Cursor ring on/off | `js/cursor.js` — `FEATURE_FLAG_CURSOR_RING` |
+
+## Spec & plan
+
+- Design spec: [`docs/superpowers/specs/2026-06-08-wedding-invitation-design.md`](docs/superpowers/specs/2026-06-08-wedding-invitation-design.md)
+- Implementation plan: [`docs/superpowers/plans/2026-06-08-wedding-invitation-implementation.md`](docs/superpowers/plans/2026-06-08-wedding-invitation-implementation.md)
