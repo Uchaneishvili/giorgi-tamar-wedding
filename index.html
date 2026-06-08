@@ -158,7 +158,43 @@
         </article>
       </div>
     </section>
-    <section id="rsvp" class="rsvp"><!-- Task 10 --></section>
+    <section id="rsvp" class="rsvp">
+      <div class="rsvp__inner">
+        <h2 class="section-title reveal">დაგვიდასტურეთ მონაწილეობა</h2>
+        <p class="rsvp__sub reveal serif-display">გთხოვთ დაგვიდასტუროთ თქვენი მონაწილეობა <em>1 ივლისი 2026</em>-მდე</p>
+
+        <form id="rsvp-form" class="rsvp__form reveal" novalidate>
+          <label class="rsvp__label" for="rsvp-name">სახელი და გვარი</label>
+          <input id="rsvp-name" name="name" type="text" class="rsvp__input"
+                 required maxlength="80" autocomplete="name" />
+          <p id="rsvp-name-help" class="rsvp__help microcopy" aria-live="polite"></p>
+
+          <div class="rsvp__actions">
+            <button type="submit" class="btn btn--solid" data-attending="true">
+              <span class="btn__label">დიახ, აუცილებლად</span>
+              <span class="btn__spinner" aria-hidden="true"></span>
+            </button>
+            <button type="submit" class="btn btn--outline" data-attending="false">
+              <span class="btn__label">სამწუხაროდ, ვერ მოვალ</span>
+              <span class="btn__spinner" aria-hidden="true"></span>
+            </button>
+          </div>
+        </form>
+
+        <div id="rsvp-success" class="rsvp__success" hidden>
+          <svg class="rsvp__check" viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M14 25 L21 32 L34 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <p class="rsvp__success-title serif-display">გმადლობთ, <span data-name></span>!</p>
+          <p class="rsvp__success-body">თქვენი პასუხი მიღებულია.</p>
+        </div>
+
+        <div id="rsvp-error" class="rsvp__error" hidden role="alert">
+          <p>რაღაც შეცდომა მოხდა. გთხოვთ, სცადოთ ხელახლა.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer id="footer" class="footer"><!-- Task 13 --></footer>
