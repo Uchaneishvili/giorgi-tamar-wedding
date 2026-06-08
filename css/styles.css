@@ -121,3 +121,31 @@ section {
   outline-offset: 3px;
   border-radius: 2px;
 }
+
+/* Loader overlay */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  z-index: 999;
+  transition: opacity 600ms var(--ease-out), visibility 0ms 600ms;
+}
+.loader.is-gone {
+  opacity: 0;
+  visibility: hidden;
+}
+.loader__monogram {
+  width: 80px;
+  height: auto;
+  color: var(--ink);
+  animation: monogram-pulse 1800ms ease-in-out infinite;
+}
+@keyframes monogram-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(0.98); }
+  50%      { opacity: 1.00; transform: scale(1.00); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader__monogram { animation: none; opacity: 1; }
+}
