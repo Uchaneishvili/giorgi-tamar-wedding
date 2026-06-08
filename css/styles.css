@@ -406,7 +406,7 @@ section {
 .event__map:focus-visible::after { transform: scaleX(1); }
 
 /* RSVP section */
-.rsvp__inner { max-width: 520px; margin: 0 auto; text-align: center; }
+.rsvp__inner { max-width: 520px; margin: 0 auto; text-align: center; perspective: 800px; }
 .rsvp__sub {
   font-style: italic;
   font-size: clamp(16px, 2vw, 18px);
