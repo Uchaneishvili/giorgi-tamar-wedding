@@ -1,5 +1,6 @@
 :root {
-  --bg: #FAFAF7;
+  --bg:     #FAFAF7;
+  --bg-alt: #F3EFE7;
   --ink: #0F0F0F;
   --ink-soft: #5C5852;
   --accent: #C97B5C;
@@ -56,6 +57,12 @@ section {
   padding: var(--section-pad-y) clamp(20px, 5vw, 48px);
   max-width: var(--container-max);
   margin: 0 auto;
+}
+
+.section--alt {
+  background: var(--bg-alt);
+  box-shadow: 0 0 0 100vmax var(--bg-alt);
+  clip-path: inset(0 -100vmax);
 }
 
 .microcopy {
@@ -606,4 +613,20 @@ section {
 }
 @media (prefers-reduced-motion: reduce) {
   .cursor-ring { display: none !important; }
+}
+
+/* ─── Welcome botanical ornament ───────────────────────────────────────── */
+.welcome__botanical {
+  display: block;
+  width: 96px;
+  height: auto;
+  margin: 32px auto;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 700ms var(--ease-out);
+}
+.welcome__botanical.is-visible { opacity: 0.85; }
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome__botanical { opacity: 0.85; transition: none; }
 }
