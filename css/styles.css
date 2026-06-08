@@ -289,3 +289,57 @@ section {
 @media (prefers-reduced-motion: reduce) {
   .countdown__value.is-flipping { animation: none; }
 }
+
+/* Our Story section */
+.story__chapter {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin: 0 auto clamp(80px, 12vh, 160px);
+  max-width: 1100px;
+  align-items: center;
+}
+.story__chapter:last-child { margin-bottom: 0; }
+
+@media (min-width: 900px) {
+  .story__chapter {
+    grid-template-columns: 6fr 6fr;
+    gap: 80px;
+  }
+}
+
+.story__image-wrap {
+  overflow: hidden;
+  border-radius: 4px;
+  position: relative;
+}
+.story__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 900ms var(--ease-out), transform 1200ms linear;
+  transform: translateY(var(--parallax, 0));
+  will-change: clip-path, transform;
+}
+.story__media.is-visible .story__image {
+  clip-path: inset(0 0 0 0);
+}
+
+.story__text { max-width: 480px; }
+.story__text .microcopy { margin: 0 0 12px; }
+.story__headline {
+  font-size: clamp(28px, 3.6vw, 42px);
+  margin: 0 0 16px;
+  line-height: 1.15;
+}
+.story__body {
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story__image { clip-path: none; transform: none; transition: none; }
+}

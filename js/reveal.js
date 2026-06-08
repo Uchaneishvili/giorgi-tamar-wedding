@@ -28,4 +28,40 @@
   } else {
     init();
   }
+
+  function initParallax() {
+    if (prefersReducedMotion) return;
+    const images = document.querySelectorAll('.story__image');
+    if (!images.length) return;
+
+    let ticking = false;
+    function update() {
+      images.forEach((img) => {
+        const rect = img.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        // 0 when off-screen below, 1 when above; midpoint when centered
+        const progress = 1 - (rect.top + rect.height / 2) / vh;
+        const clamped = Math.max(0, Math.min(1, progress));
+        // -30px max drift (matches spec)
+        const offset = (clamped - 0.5) * -30;
+        img.style.setProperty('--parallax', `${offset.toFixed(1)}px`);
+      });
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    update();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initParallax);
+  } else {
+    initParallax();
+  }
 })();
