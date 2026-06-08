@@ -1678,7 +1678,7 @@ Find the existing `<button id="music-toggle" ...>` and `<div id="music-tooltip" 
     <rect x="14" y="5" width="4" height="14" fill="currentColor" />
   </svg>
 </button>
-<div id="music-tooltip" class="music-tooltip" role="status" aria-hidden="true">
+<div id="music-tooltip" class="music-tooltip" role="status">
   მუსიკის ჩასართავად დააწექი ♪
 </div>
 ```
