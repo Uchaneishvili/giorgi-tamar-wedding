@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>გიორგი & თამარი — 12 ივლისი 2026</title>
+  <meta name="description" content="გიორგი და თამარის საქორწინო მოწვევა — 12 ივლისი 2026, საქართველო." />
+  <meta name="theme-color" content="#FAFAF7" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="loader" class="loader" aria-hidden="true">
+    <!-- monogram SVG injected/inlined in Task 3 -->
+  </div>
+
+  <button id="music-toggle" class="music-toggle" type="button" aria-pressed="false"
+          aria-label="ფონური მუსიკის ჩართვა / გათიშვა">
+    <!-- play/pause SVG; filled in Task 14 -->
+  </button>
+  <div id="music-tooltip" class="music-tooltip" role="status" aria-hidden="true">
+    მუსიკის ჩასართავად დააწექი ♪
+  </div>
+
+  <main>
+    <section id="hero" class="hero"><!-- Task 4 --></section>
+    <section id="welcome" class="welcome"><!-- Task 6 --></section>
+    <section id="countdown" class="countdown"><!-- Task 7 --></section>
+    <section id="story" class="story"><!-- Task 8 --></section>
+    <section id="events" class="events"><!-- Task 9 --></section>
+    <section id="rsvp" class="rsvp"><!-- Task 10 --></section>
+  </main>
+
+  <footer id="footer" class="footer"><!-- Task 13 --></footer>
+
+  <audio id="bgm" loop preload="metadata">
+    <source src="audio/ambient.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script defer src="js/reveal.js"></script>
+  <script defer src="js/countdown.js"></script>
+  <script defer src="js/rsvp.js"></script>
+  <script defer src="js/music.js"></script>
+  <script defer src="js/cursor.js"></script>
+  <script defer src="js/main.js"></script>
+</body>
+</html>
