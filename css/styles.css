@@ -544,7 +544,7 @@ body.is-sealed {
   display: grid;
   grid-template-columns: 1fr;
   gap: 48px;
-  align-items: start;
+  align-items: stretch;
   max-width: 900px;
   margin: 0 auto;
 }
@@ -560,8 +560,14 @@ body.is-sealed {
   .events__divider { display: block; }
 }
 
-.event { text-align: center; }
+.event {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .event__label { margin: 0 0 16px; }
+.event__map { margin-top: auto; }
 .event__time {
   font-size: clamp(48px, 6vw, 72px);
   margin: 0 0 16px;
@@ -803,56 +809,155 @@ body.is-sealed {
   .cursor-ring { display: none !important; }
 }
 
-/* ─── Welcome couple silhouette ─────────────────────────────────────────── */
-.welcome__couple {
+/* ─── Ceremony scene (couple + bearded priest) ───────────────────────────── */
+.ceremony-scene {
   display: block;
-  width: clamp(120px, 22vw, 160px);
+  width: clamp(200px, 38vw, 280px);
   height: auto;
-  margin: clamp(40px, 6vw, 56px) auto clamp(24px, 4vw, 36px);
+  margin: 4px auto 20px;
   color: var(--ink);
 }
-.welcome__couple .couple__line,
-.welcome__couple .couple__head,
-.welcome__couple .couple__hair {
+.ceremony-scene .priest__line,
+.ceremony-scene .priest__cross {
   fill: none;
   stroke: currentColor;
   stroke-width: 1.1;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.welcome__couple .couple__veil {
+.ceremony-scene .priest__beard {
+  fill: rgba(15, 15, 15, 0.05);
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ceremony-scene .priest__cross {
+  stroke: var(--accent);
+  stroke-width: 1.2;
+  animation: priest-cross-glow 3s ease-in-out infinite;
+}
+.ceremony-scene .priest__hand {
+  fill: currentColor;
+  stroke: none;
+  opacity: 0.55;
+}
+@keyframes priest-cross-glow {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ceremony-scene .priest__cross { animation: none; }
+}
+
+/* ─── Bouquet toss scene (inside Wedding event card) ─────────────────────── */
+.toss-scene {
+  display: block;
+  width: clamp(220px, 40vw, 320px);
+  height: auto;
+  margin: 4px auto 20px;
+  color: var(--ink);
+  overflow: visible;
+}
+.toss-scene * {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.toss__ground {
+  stroke-width: 0.8;
+  stroke-dasharray: 2 6;
+  opacity: 0.25;
+}
+.toss__veil {
+  stroke-width: 0.9;
+  opacity: 0.4;
+}
+.toss__hand {
+  fill: currentColor;
+  stroke: none;
+  opacity: 0.7;
+}
+.toss__petal {
+  fill: var(--accent);
+  stroke: none;
+  opacity: 0.9;
+}
+.toss__leaf {
+  stroke: var(--sage);
+  stroke-width: 0.9;
+  fill: none;
+}
+
+/* Bouquet motion is driven by SMIL <animateMotion> in markup; catchers bounce */
+.toss__catcher {
+  animation: catcher-bounce 1600ms ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 220ms);
+  transform-box: fill-box;
+  transform-origin: bottom center;
+}
+@keyframes catcher-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toss__catcher { animation: none; }
+}
+
+/* ─── Couple silhouette (shared by welcome + ceremony scenes) ────────────── */
+.couple__line,
+.couple__head,
+.couple__hair {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.couple__veil {
   fill: none;
   stroke: currentColor;
   stroke-width: 0.9;
   stroke-linecap: round;
   opacity: 0.35;
 }
-.welcome__couple .couple__waist {
+.couple__waist {
   fill: none;
   stroke: currentColor;
   stroke-width: 0.9;
   opacity: 0.35;
 }
-.welcome__couple .couple__bouquet circle {
+.couple__bouquet circle {
   fill: var(--accent);
   stroke: none;
   opacity: 0.85;
 }
-.welcome__couple .couple__stem {
+.couple__stem {
   fill: none;
   stroke: var(--sage);
   stroke-width: 1;
   stroke-linecap: round;
 }
-.welcome__couple .couple__button {
+.couple__button {
   fill: currentColor;
   stroke: none;
   opacity: 0.6;
 }
-.welcome__couple .couple__hands {
+.couple__hands {
   stroke: currentColor;
   stroke-width: 1.2;
   stroke-linecap: round;
+}
+
+.welcome__couple {
+  display: block;
+  width: clamp(120px, 22vw, 160px);
+  height: auto;
+  margin: clamp(40px, 6vw, 56px) auto clamp(24px, 4vw, 36px);
+  color: var(--ink);
 }
 
 /* ─── Welcome botanical ornament ───────────────────────────────────────── */

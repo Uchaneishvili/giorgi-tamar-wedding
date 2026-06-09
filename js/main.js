@@ -1,6 +1,13 @@
 (function () {
   'use strict';
 
+  // Honor prefers-reduced-motion for SMIL animations (which CSS can't disable)
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('animateMotion, animate, animateTransform').forEach((el) => {
+      el.remove();
+    });
+  }
+
   function hideLoader() {
     const loader = document.getElementById('loader');
     if (!loader) return;

@@ -239,6 +239,7 @@
         </div>
       </div>
     </section>
+    <!--
     <section id="story" class="story">
       <h2 class="section-title reveal">ჩვენი ისტორია</h2>
       <svg class="ornament-fleuron reveal" viewBox="0 0 160 20" aria-hidden="true"
@@ -309,6 +310,7 @@
         </div>
       </article>
     </section>
+    -->
     <section id="events" class="events section--alt">
       <h2 class="section-title reveal">12 ივლისი, 2026</h2>
       <svg class="ornament-fleuron reveal" viewBox="0 0 160 20" aria-hidden="true"
@@ -330,6 +332,74 @@
       <div class="events__grid">
         <article class="event reveal">
           <p class="microcopy event__label">ჯვრისწერა</p>
+          <svg class="ceremony-scene" viewBox="0 0 280 200" aria-hidden="true">
+            <!-- COUPLE (mirrors welcome silhouette) -->
+            <g class="ceremony__couple">
+              <!-- BRIDE -->
+              <g class="couple__bride">
+                <path class="couple__veil" d="M 47 56 C 32 78, 22 118, 24 178" />
+                <path class="couple__veil" d="M 50 60 C 38 83, 32 123, 34 180" />
+                <ellipse class="couple__hair" cx="55" cy="39" rx="4" ry="4.5" />
+                <circle class="couple__head" cx="55" cy="52" r="10" />
+                <line class="couple__line" x1="55" y1="62" x2="55" y2="71" />
+                <path class="couple__line" d="M 41 78 C 47 72, 63 72, 69 78" />
+                <path class="couple__line" d="M 41 78 C 41 78, 32 138, 28 185 L 82 185 C 78 138, 69 78, 69 78" />
+                <line class="couple__waist" x1="46" y1="100" x2="64" y2="100" />
+                <g class="couple__bouquet" transform="translate(46, 108)">
+                  <circle r="3" />
+                  <circle cx="-3" cy="-1" r="2" />
+                  <circle cx="3" cy="-1" r="2" />
+                  <circle cx="0" cy="-4" r="1.8" />
+                  <circle cx="-2" cy="2" r="1.5" />
+                </g>
+                <path class="couple__stem" d="M 46 111 L 44 122" />
+              </g>
+              <!-- GROOM -->
+              <g class="couple__groom">
+                <path class="couple__line" d="M 92 49 C 95 43, 105 43, 108 49" />
+                <circle class="couple__head" cx="100" cy="54" r="10" />
+                <line class="couple__line" x1="100" y1="64" x2="100" y2="72" />
+                <path class="couple__line" d="M 86 80 C 92 74, 108 74, 114 80" />
+                <path class="couple__line" d="M 86 80 L 84 140 L 116 140 L 114 80" />
+                <path class="couple__line" d="M 92 80 L 100 102, 108 80" />
+                <line class="couple__waist" x1="100" y1="102" x2="100" y2="138" />
+                <circle class="couple__button" cx="100" cy="112" r="0.8" />
+                <circle class="couple__button" cx="100" cy="122" r="0.8" />
+                <circle class="couple__button" cx="100" cy="132" r="0.8" />
+                <path class="couple__line" d="M 84 140 L 86 185" />
+                <path class="couple__line" d="M 116 140 L 114 185" />
+                <line class="couple__line" x1="100" y1="140" x2="100" y2="185" />
+                <line class="couple__line" x1="83" y1="186" x2="92" y2="186" />
+                <line class="couple__line" x1="108" y1="186" x2="117" y2="186" />
+              </g>
+              <line class="couple__hands" x1="69" y1="106" x2="86" y2="106" />
+            </g>
+
+            <!-- PRIEST (right side, bearded father / მამაო) -->
+            <g class="ceremony__priest">
+              <!-- Mitre -->
+              <path class="priest__line" d="M 192 50 L 215 12 L 238 50 Z" />
+              <!-- Cross on mitre -->
+              <line class="priest__cross" x1="215" y1="36" x2="215" y2="16" />
+              <line class="priest__cross" x1="208" y1="26" x2="222" y2="26" />
+              <!-- Head -->
+              <circle class="priest__line" cx="215" cy="62" r="10" />
+              <!-- Mustache -->
+              <path class="priest__line" d="M 209 71 Q 215 73, 221 71" />
+              <!-- Long flowing beard -->
+              <path class="priest__beard" d="M 207 72 C 205 95, 211 115, 215 122 C 219 115, 225 95, 223 72" />
+              <!-- Shoulders -->
+              <path class="priest__line" d="M 198 82 Q 215 76, 232 82" />
+              <!-- Vestment / robe -->
+              <path class="priest__line" d="M 198 82 L 188 185 L 242 185 L 232 82" />
+              <!-- Cross on chest (omophorion-style large cross) -->
+              <line class="priest__cross" x1="215" y1="120" x2="215" y2="148" />
+              <line class="priest__cross" x1="208" y1="134" x2="222" y2="134" />
+              <!-- Hands clasped at robe -->
+              <circle class="priest__hand" cx="208" cy="148" r="2" />
+              <circle class="priest__hand" cx="222" cy="148" r="2" />
+            </g>
+          </svg>
           <p class="event__time serif-display">15:00</p>
           <p class="event__venue">წმ. ილია მართალის ტაძარი</p>
           <p class="event__city">საგურამო</p>
@@ -343,6 +413,85 @@
 
         <article class="event reveal">
           <p class="microcopy event__label">ქორწილი</p>
+          <svg class="toss-scene" viewBox="0 0 480 240" aria-hidden="true">
+            <line class="toss__ground" x1="20" y1="232" x2="460" y2="232" />
+
+            <!-- BRIDE (back view, throwing arm raised) -->
+            <g class="toss__bride">
+              <path class="toss__veil" d="M 50 80 C 30 120, 22 180, 26 230" />
+              <path class="toss__veil" d="M 56 86 C 40 125, 32 185, 38 232" />
+              <ellipse cx="62" cy="56" rx="4.5" ry="5" />
+              <circle cx="62" cy="70" r="10" />
+              <line x1="62" y1="80" x2="62" y2="88" />
+              <path d="M 48 95 C 54 88, 70 88, 76 95" />
+              <path d="M 48 95 L 38 232 L 82 232 L 76 95" />
+              <path d="M 76 95 Q 86 60, 90 32" />
+              <circle class="toss__hand" cx="90" cy="32" r="2" />
+            </g>
+
+            <!-- BOUQUET (animated along arc via SMIL) -->
+            <g class="toss__bouquet">
+              <animateMotion
+                dur="4s"
+                repeatCount="indefinite"
+                path="M 90 32 Q 230 -55, 370 92"
+                rotate="auto"
+                keyTimes="0;0.78;0.95;1"
+                keyPoints="0;1;1;0"
+                calcMode="linear" />
+              <animate
+                attributeName="opacity"
+                values="1;1;1;0;0;1"
+                keyTimes="0;0.78;0.82;0.92;0.99;1"
+                dur="4s"
+                repeatCount="indefinite" />
+              <circle class="toss__petal" r="5" />
+              <circle class="toss__petal" cx="-4" cy="-2" r="3.2" />
+              <circle class="toss__petal" cx="4" cy="-2" r="3.2" />
+              <circle class="toss__petal" cx="0" cy="-5" r="2.8" />
+              <circle class="toss__petal" cx="-2" cy="3" r="2.6" />
+              <circle class="toss__petal" cx="3" cy="3" r="2.6" />
+              <path class="toss__leaf" d="M -6 1 L -9 -2" />
+              <path class="toss__leaf" d="M 6 2 L 9 -1" />
+            </g>
+
+            <!-- CATCHERS (3 figures) -->
+            <g class="toss__catcher" style="--i:0">
+              <circle cx="305" cy="118" r="8" />
+              <path d="M 297 113 Q 305 108, 313 113" />
+              <line x1="305" y1="126" x2="305" y2="135" />
+              <path d="M 293 140 C 299 134, 311 134, 317 140" />
+              <path d="M 293 140 L 289 232 L 321 232 L 317 140" />
+              <path d="M 297 138 Q 295 100, 298 78" />
+              <path d="M 313 138 Q 315 100, 312 78" />
+              <circle class="toss__hand" cx="298" cy="78" r="1.5" />
+              <circle class="toss__hand" cx="312" cy="78" r="1.5" />
+            </g>
+
+            <g class="toss__catcher" style="--i:1">
+              <circle cx="365" cy="125" r="7" />
+              <path d="M 358 120 Q 365 116, 372 120" />
+              <line x1="365" y1="132" x2="365" y2="140" />
+              <path d="M 354 145 C 359 140, 371 140, 376 145" />
+              <path d="M 354 145 L 351 232 L 379 232 L 376 145" />
+              <path d="M 357 143 Q 354 105, 357 86" />
+              <path d="M 373 143 Q 376 105, 373 86" />
+              <circle class="toss__hand" cx="357" cy="86" r="1.5" />
+              <circle class="toss__hand" cx="373" cy="86" r="1.5" />
+            </g>
+
+            <g class="toss__catcher" style="--i:2">
+              <circle cx="420" cy="120" r="8" />
+              <path d="M 412 115 Q 420 110, 428 115" />
+              <line x1="420" y1="128" x2="420" y2="137" />
+              <path d="M 408 142 C 414 136, 426 136, 432 142" />
+              <path d="M 408 142 L 404 232 L 436 232 L 432 142" />
+              <path d="M 412 140 Q 410 102, 413 82" />
+              <path d="M 428 140 Q 430 102, 427 82" />
+              <circle class="toss__hand" cx="413" cy="82" r="1.5" />
+              <circle class="toss__hand" cx="427" cy="82" r="1.5" />
+            </g>
+          </svg>
           <p class="event__time serif-display">19:00</p>
           <p class="event__venue">რესტორანი ბაგინეთი</p>
           <p class="event__city">მცხეთა</p>
