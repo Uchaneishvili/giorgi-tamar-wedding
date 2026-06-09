@@ -42,7 +42,34 @@
       <svg class="hero__arch" viewBox="0 0 200 320" aria-hidden="true"
            fill="none" stroke="currentColor" stroke-width="1.2"
            stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet">
-        <path d="M 10 320 L 10 100 Q 10 10, 100 10 Q 190 10, 190 100 L 190 320" />
+        <path class="arch__line" d="M 10 320 L 10 100 Q 10 10, 100 10 Q 190 10, 190 100 L 190 320" />
+        <g class="arch__vine">
+          <g class="vine__leaf" style="--i:0"><path d="M 10 295 Q 4 290, 0 285 Q 6 295, 10 295" /></g>
+          <g class="vine__leaf" style="--i:1"><path d="M 10 270 Q 16 264, 21 261 Q 14 271, 10 270" /></g>
+          <g class="vine__flower" style="--i:2"><circle cx="6" cy="240" r="3"/><circle class="dot" cx="6" cy="240" r="1.2"/></g>
+          <g class="vine__leaf" style="--i:3"><path d="M 10 215 Q 16 209, 21 206 Q 14 216, 10 215" /></g>
+          <g class="vine__leaf" style="--i:4"><path d="M 10 190 Q 4 185, 0 180 Q 6 190, 10 190" /></g>
+          <g class="vine__leaf" style="--i:5"><path d="M 10 160 Q 16 154, 21 151 Q 14 161, 10 160" /></g>
+          <g class="vine__flower" style="--i:6"><circle cx="6" cy="135" r="2.5"/><circle class="dot" cx="6" cy="135" r="1"/></g>
+          <g class="vine__leaf" style="--i:7"><path d="M 12 108 Q 6 103, 2 100 Q 8 110, 12 108" /></g>
+          <g class="vine__leaf" style="--i:8"><path d="M 22 78 Q 16 75, 11 73 Q 19 82, 22 78" /></g>
+          <g class="vine__flower" style="--i:9"><circle cx="38" cy="50" r="2.8"/><circle class="dot" cx="38" cy="50" r="1.1"/></g>
+          <g class="vine__leaf" style="--i:10"><path d="M 60 28 Q 53 22, 50 18 Q 58 28, 60 28" /></g>
+          <g class="vine__flower" style="--i:11"><circle cx="80" cy="12" r="2.5"/><circle class="dot" cx="80" cy="12" r="1"/></g>
+          <g class="vine__flower" style="--i:12"><circle cx="100" cy="5" r="4"/><circle class="dot" cx="100" cy="5" r="1.8"/></g>
+          <g class="vine__flower" style="--i:13"><circle cx="120" cy="12" r="2.5"/><circle class="dot" cx="120" cy="12" r="1"/></g>
+          <g class="vine__leaf" style="--i:14"><path d="M 140 28 Q 147 22, 150 18 Q 142 28, 140 28" /></g>
+          <g class="vine__flower" style="--i:15"><circle cx="162" cy="50" r="2.8"/><circle class="dot" cx="162" cy="50" r="1.1"/></g>
+          <g class="vine__leaf" style="--i:16"><path d="M 178 78 Q 184 75, 189 73 Q 181 82, 178 78" /></g>
+          <g class="vine__leaf" style="--i:17"><path d="M 188 108 Q 194 103, 198 100 Q 192 110, 188 108" /></g>
+          <g class="vine__flower" style="--i:18"><circle cx="194" cy="135" r="2.5"/><circle class="dot" cx="194" cy="135" r="1"/></g>
+          <g class="vine__leaf" style="--i:19"><path d="M 190 160 Q 184 154, 179 151 Q 186 161, 190 160" /></g>
+          <g class="vine__leaf" style="--i:20"><path d="M 190 190 Q 196 185, 200 180 Q 194 190, 190 190" /></g>
+          <g class="vine__leaf" style="--i:21"><path d="M 190 215 Q 184 209, 179 206 Q 186 216, 190 215" /></g>
+          <g class="vine__flower" style="--i:22"><circle cx="194" cy="240" r="3"/><circle class="dot" cx="194" cy="240" r="1.2"/></g>
+          <g class="vine__leaf" style="--i:23"><path d="M 190 270 Q 184 264, 179 261 Q 186 271, 190 270" /></g>
+          <g class="vine__leaf" style="--i:24"><path d="M 190 295 Q 196 290, 200 285 Q 194 295, 190 295" /></g>
+        </g>
       </svg>
       <svg class="hero__sprig hero__sprig--tl" viewBox="0 0 60 60" aria-hidden="true"
            fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
@@ -70,64 +97,6 @@
         <ellipse cx="30" cy="34" rx="2" ry="1.5" />
         <ellipse cx="34" cy="30" rx="1.5" ry="2" />
         <ellipse cx="34" cy="38" rx="1.5" ry="2" />
-      </svg>
-
-      <svg class="hero__bouquet" viewBox="0 0 200 240" aria-hidden="true"
-           fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-        <g class="bouquet__stems">
-          <path d="M 100 225 Q 100 170, 100 55" />
-          <path d="M 100 225 Q 90 170, 68 78" />
-          <path d="M 100 225 Q 110 170, 132 78" />
-          <path d="M 100 225 Q 82 165, 52 128" />
-          <path d="M 100 225 Q 118 165, 148 128" />
-        </g>
-        <g class="bouquet__leaves">
-          <path d="M 100 178 Q 88 168, 80 160 Q 92 170, 100 178 Z" />
-          <path d="M 100 178 Q 112 168, 120 160 Q 108 170, 100 178 Z" />
-          <path d="M 92 142 Q 78 138, 68 130 Q 84 140, 92 142 Z" />
-          <path d="M 108 142 Q 122 138, 132 130 Q 116 140, 108 142 Z" />
-          <path d="M 78 108 Q 66 100, 58 92 Q 72 104, 78 108 Z" />
-          <path d="M 122 108 Q 134 100, 142 92 Q 128 104, 122 108 Z" />
-        </g>
-        <g class="bouquet__flowers">
-          <g class="bouquet__flower">
-            <ellipse cx="100" cy="42" rx="3" ry="6" />
-            <ellipse cx="100" cy="42" rx="3" ry="6" transform="rotate(72 100 50)" />
-            <ellipse cx="100" cy="42" rx="3" ry="6" transform="rotate(144 100 50)" />
-            <ellipse cx="100" cy="42" rx="3" ry="6" transform="rotate(216 100 50)" />
-            <ellipse cx="100" cy="42" rx="3" ry="6" transform="rotate(288 100 50)" />
-            <circle class="bouquet__dot" cx="100" cy="50" r="2" />
-          </g>
-          <g class="bouquet__flower">
-            <ellipse cx="68" cy="70" rx="2.5" ry="5" />
-            <ellipse cx="68" cy="70" rx="2.5" ry="5" transform="rotate(72 68 76)" />
-            <ellipse cx="68" cy="70" rx="2.5" ry="5" transform="rotate(144 68 76)" />
-            <ellipse cx="68" cy="70" rx="2.5" ry="5" transform="rotate(216 68 76)" />
-            <ellipse cx="68" cy="70" rx="2.5" ry="5" transform="rotate(288 68 76)" />
-            <circle class="bouquet__dot" cx="68" cy="76" r="1.6" />
-          </g>
-          <g class="bouquet__flower">
-            <ellipse cx="132" cy="70" rx="2.5" ry="5" />
-            <ellipse cx="132" cy="70" rx="2.5" ry="5" transform="rotate(72 132 76)" />
-            <ellipse cx="132" cy="70" rx="2.5" ry="5" transform="rotate(144 132 76)" />
-            <ellipse cx="132" cy="70" rx="2.5" ry="5" transform="rotate(216 132 76)" />
-            <ellipse cx="132" cy="70" rx="2.5" ry="5" transform="rotate(288 132 76)" />
-            <circle class="bouquet__dot" cx="132" cy="76" r="1.6" />
-          </g>
-          <g class="bouquet__flower">
-            <circle cx="52" cy="123" r="4" />
-            <circle class="bouquet__dot" cx="52" cy="123" r="1.5" />
-          </g>
-          <g class="bouquet__flower">
-            <circle cx="148" cy="123" r="4" />
-            <circle class="bouquet__dot" cx="148" cy="123" r="1.5" />
-          </g>
-        </g>
-        <g class="bouquet__tie">
-          <path d="M 86 215 Q 100 220, 114 215" />
-          <path d="M 86 215 Q 82 224, 78 230" />
-          <path d="M 114 215 Q 118 224, 122 230" />
-        </g>
       </svg>
 
       <p class="microcopy hero__kicker">მოწვევა ქორწილში</p>
