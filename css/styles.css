@@ -729,6 +729,82 @@ section {
   .hero__sprig { opacity: 0.5; transition: none; }
 }
 
+/* Hero bouquet — animated SVG flowers */
+.hero__bouquet {
+  position: absolute;
+  left: 50%;
+  bottom: -8%;
+  width: clamp(180px, 26vw, 280px);
+  height: auto;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.hero__bouquet .bouquet__stems > path,
+.hero__bouquet .bouquet__leaves > path { stroke: var(--sage); fill: none; }
+.hero__bouquet .bouquet__flowers ellipse,
+.hero__bouquet .bouquet__flowers > g > circle:not(.bouquet__dot),
+.hero__bouquet .bouquet__tie > path { stroke: var(--accent); fill: none; }
+.hero__bouquet .bouquet__dot { stroke: none; fill: var(--accent); }
+
+/* Initial states for entrance choreography */
+.hero__bouquet .bouquet__stems > path {
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  transition: stroke-dashoffset 1200ms var(--ease-out);
+}
+.hero__bouquet .bouquet__leaves > path {
+  opacity: 0;
+  transition: opacity 600ms var(--ease-out);
+}
+.hero__bouquet .bouquet__flower {
+  opacity: 0;
+  transition: opacity 600ms var(--ease-out);
+}
+.hero__bouquet .bouquet__tie > path {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  transition: stroke-dashoffset 600ms var(--ease-out);
+}
+
+/* Staggered reveal once hero is ready (~600ms-3.0s after hero entrance) */
+.hero.is-ready .hero__bouquet .bouquet__stems > path:nth-child(1) { stroke-dashoffset: 0; transition-delay: 600ms; }
+.hero.is-ready .hero__bouquet .bouquet__stems > path:nth-child(2) { stroke-dashoffset: 0; transition-delay: 720ms; }
+.hero.is-ready .hero__bouquet .bouquet__stems > path:nth-child(3) { stroke-dashoffset: 0; transition-delay: 840ms; }
+.hero.is-ready .hero__bouquet .bouquet__stems > path:nth-child(4) { stroke-dashoffset: 0; transition-delay: 960ms; }
+.hero.is-ready .hero__bouquet .bouquet__stems > path:nth-child(5) { stroke-dashoffset: 0; transition-delay: 1080ms; }
+
+.hero.is-ready .hero__bouquet .bouquet__leaves > path:nth-child(1) { opacity: 1; transition-delay: 1500ms; }
+.hero.is-ready .hero__bouquet .bouquet__leaves > path:nth-child(2) { opacity: 1; transition-delay: 1560ms; }
+.hero.is-ready .hero__bouquet .bouquet__leaves > path:nth-child(3) { opacity: 1; transition-delay: 1620ms; }
+.hero.is-ready .hero__bouquet .bouquet__leaves > path:nth-child(4) { opacity: 1; transition-delay: 1680ms; }
+.hero.is-ready .hero__bouquet .bouquet__leaves > path:nth-child(5) { opacity: 1; transition-delay: 1740ms; }
+.hero.is-ready .hero__bouquet .bouquet__leaves > path:nth-child(6) { opacity: 1; transition-delay: 1800ms; }
+
+.hero.is-ready .hero__bouquet .bouquet__flower:nth-child(1) { opacity: 1; transition-delay: 2100ms; }
+.hero.is-ready .hero__bouquet .bouquet__flower:nth-child(2) { opacity: 1; transition-delay: 2250ms; }
+.hero.is-ready .hero__bouquet .bouquet__flower:nth-child(3) { opacity: 1; transition-delay: 2400ms; }
+.hero.is-ready .hero__bouquet .bouquet__flower:nth-child(4) { opacity: 1; transition-delay: 2550ms; }
+.hero.is-ready .hero__bouquet .bouquet__flower:nth-child(5) { opacity: 1; transition-delay: 2700ms; }
+
+.hero.is-ready .hero__bouquet .bouquet__tie > path { stroke-dashoffset: 0; transition-delay: 2900ms; }
+
+@media (max-width: 600px) {
+  .hero__bouquet { width: 150px; bottom: -5%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__bouquet .bouquet__stems > path,
+  .hero__bouquet .bouquet__leaves > path,
+  .hero__bouquet .bouquet__flower,
+  .hero__bouquet .bouquet__tie > path {
+    opacity: 1;
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+}
+
 /* Footer crown with side branches */
 .footer__crown {
   display: flex;
