@@ -4,6 +4,7 @@
   --ink: #0F0F0F;
   --ink-soft: #5C5852;
   --accent: #C97B5C;
+  --sage:   #7A8B6A;
   --line: #E8E2D8;
 
   --font-display: 'Fraunces', 'Noto Serif Georgian', Georgia, serif;
@@ -646,7 +647,7 @@ section {
   width: 96px;
   height: auto;
   margin: 32px auto;
-  color: var(--accent);
+  color: var(--sage);
   opacity: 0;
   transition: opacity 700ms var(--ease-out);
 }
@@ -676,7 +677,7 @@ section {
   position: absolute;
   width: clamp(60px, 9vw, 100px);
   height: auto;
-  color: var(--accent);
+  color: var(--sage);
   opacity: 0;
   transition: opacity 1200ms var(--ease-out);
   transition-delay: 600ms;
@@ -712,7 +713,7 @@ section {
 .footer__branch {
   width: clamp(60px, 10vw, 96px);
   height: auto;
-  color: var(--accent);
+  color: var(--sage);
   opacity: 0.55;
 }
 
