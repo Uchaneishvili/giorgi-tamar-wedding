@@ -647,7 +647,7 @@ section {
   width: 96px;
   height: auto;
   margin: 32px auto;
-  color: var(--sage);
+  color: var(--accent);
   opacity: 0;
   transition: opacity 700ms var(--ease-out);
 }
@@ -677,7 +677,7 @@ section {
   position: absolute;
   width: clamp(60px, 9vw, 100px);
   height: auto;
-  color: var(--sage);
+  color: var(--accent);
   opacity: 0;
   transition: opacity 1200ms var(--ease-out);
   transition-delay: 600ms;
@@ -713,8 +713,15 @@ section {
 .footer__branch {
   width: clamp(60px, 10vw, 96px);
   height: auto;
-  color: var(--sage);
+  color: var(--accent);
   opacity: 0.55;
+}
+
+/* Bi-color ornaments: leaf/stem paths override to sage */
+.welcome__botanical .leaf,
+.hero__sprig .leaf,
+.footer__branch .leaf {
+  stroke: var(--sage);
 }
 
 @media (max-width: 480px) {
