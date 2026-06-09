@@ -37,13 +37,24 @@
   function startHero() {
     splitChars();
     const hero = document.getElementById('hero');
-    if (hero) {
-      // Wait for loader fade so cascade is visible
-      setTimeout(() => hero.classList.add('is-ready'), 200);
+    if (!hero) return;
+
+    let started = false;
+    function reveal() {
+      if (started) return;
+      started = true;
+      hero.classList.add('is-ready');
     }
+
+    // Reveal once the envelope is opened — listen first in case the event
+    // fires before fonts are ready.
+    document.addEventListener('envelope:opened', reveal, { once: true });
+
+    // Fallback: if envelope script never dispatches (404, error), reveal anyway
+    setTimeout(reveal, 4000);
   }
 
-  // Run after loader hides
+  // Prepare hero (split chars + listener) as soon as fonts are ready
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(startHero);
   } else {

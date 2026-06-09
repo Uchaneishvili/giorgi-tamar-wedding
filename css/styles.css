@@ -292,6 +292,142 @@ section {
   .loader__monogram { animation: none; opacity: 1; }
 }
 
+/* Envelope intro overlay */
+body.is-sealed {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.envelope-intro {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, #FBF7EE 0%, var(--bg) 70%);
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  transition: opacity 800ms var(--ease-out), visibility 0ms 800ms;
+}
+.envelope-intro.is-gone {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.envelope-intro__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(28px, 5vh, 44px);
+  perspective: 1400px;
+}
+
+.envelope {
+  position: relative;
+  width: clamp(240px, 65vw, 380px);
+  aspect-ratio: 5 / 3;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 400ms var(--ease-out), filter 400ms var(--ease-out);
+  filter: drop-shadow(0 22px 36px rgba(15, 15, 15, 0.14));
+}
+.envelope:hover {
+  transform: translateY(-4px);
+  filter: drop-shadow(0 28px 44px rgba(15, 15, 15, 0.18));
+}
+.envelope:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 10px;
+  border-radius: 4px;
+}
+
+.envelope__back {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #F7F1E8 0%, #EFE6D5 100%);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.envelope__seams {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+}
+
+.envelope__flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(155deg, #F5EFE6 0%, #E6DCC6 100%);
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  transform-origin: top center;
+  transition: transform 1200ms cubic-bezier(0.65, 0, 0.35, 1);
+  z-index: 3;
+  backface-visibility: hidden;
+}
+.envelope__flap-shadow {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  background: linear-gradient(180deg, rgba(15, 15, 15, 0) 60%, rgba(15, 15, 15, 0.08) 100%);
+  pointer-events: none;
+}
+
+.envelope-intro.is-opening .envelope__flap {
+  transform: rotateX(-172deg);
+}
+
+.envelope__seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(54px, 14vw, 72px);
+  height: clamp(54px, 14vw, 72px);
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  transition: transform 320ms cubic-bezier(0.34, 1.4, 0.64, 1), opacity 320ms ease-out;
+  filter: drop-shadow(0 3px 6px rgba(15, 15, 15, 0.28));
+}
+.envelope__seal svg { width: 100%; height: 100%; display: block; }
+
+.envelope-intro.is-opening .envelope__seal {
+  transform: translate(-50%, -50%) scale(0.4) rotate(-22deg);
+  opacity: 0;
+}
+
+.envelope__hint {
+  font-size: clamp(15px, 1.6vw, 17px);
+  color: var(--ink-soft);
+  font-style: italic;
+  letter-spacing: 0.01em;
+  margin: 0;
+  text-align: center;
+  animation: envelope-hint-pulse 2400ms ease-in-out infinite;
+}
+.envelope-intro.is-opening .envelope__hint {
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+  animation: none;
+}
+
+@keyframes envelope-hint-pulse {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .envelope-intro { transition: opacity 400ms; }
+  .envelope__flap, .envelope__seal { transition: opacity 300ms; }
+  .envelope-intro.is-opening .envelope__flap { opacity: 0; transform: none; }
+  .envelope-intro.is-opening .envelope__seal { opacity: 0; transform: translate(-50%, -50%); }
+  .envelope__hint { animation: none; opacity: 0.75; }
+}
+
 /* Welcome section */
 .welcome {
   max-width: var(--read-max);
@@ -665,6 +801,58 @@ section {
 }
 @media (prefers-reduced-motion: reduce) {
   .cursor-ring { display: none !important; }
+}
+
+/* ─── Welcome couple silhouette ─────────────────────────────────────────── */
+.welcome__couple {
+  display: block;
+  width: clamp(120px, 22vw, 160px);
+  height: auto;
+  margin: clamp(40px, 6vw, 56px) auto clamp(24px, 4vw, 36px);
+  color: var(--ink);
+}
+.welcome__couple .couple__line,
+.welcome__couple .couple__head,
+.welcome__couple .couple__hair {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.welcome__couple .couple__veil {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.9;
+  stroke-linecap: round;
+  opacity: 0.35;
+}
+.welcome__couple .couple__waist {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.9;
+  opacity: 0.35;
+}
+.welcome__couple .couple__bouquet circle {
+  fill: var(--accent);
+  stroke: none;
+  opacity: 0.85;
+}
+.welcome__couple .couple__stem {
+  fill: none;
+  stroke: var(--sage);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+.welcome__couple .couple__button {
+  fill: currentColor;
+  stroke: none;
+  opacity: 0.6;
+}
+.welcome__couple .couple__hands {
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linecap: round;
 }
 
 /* ─── Welcome botanical ornament ───────────────────────────────────────── */

@@ -68,8 +68,17 @@
     else play();
   });
 
-  // Show tooltip 2s after load (only if music never started)
-  setTimeout(showTooltip, 2000);
+  // Show tooltip ~2s after the envelope is opened (only if music never started)
+  let tooltipScheduled = false;
+  function scheduleTooltip() {
+    if (tooltipScheduled) return;
+    tooltipScheduled = true;
+    setTimeout(showTooltip, 2000);
+  }
+  document.addEventListener('envelope:opened', scheduleTooltip, { once: true });
+  // Fallback: schedule anyway after 6s in case envelope event never fires
+  setTimeout(scheduleTooltip, 6000);
+
   // Dismiss on any click anywhere
   document.addEventListener('click', dismissTooltip, { once: false });
 })();

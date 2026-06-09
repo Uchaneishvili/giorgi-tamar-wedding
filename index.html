@@ -13,7 +13,31 @@
   <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
+<body class="is-sealed">
+  <div id="envelope-intro" class="envelope-intro" role="dialog" aria-modal="true" aria-labelledby="envelope-hint">
+    <div class="envelope-intro__stage">
+      <button id="envelope-open" class="envelope" type="button" aria-label="გახსენი მოწვევა">
+        <span class="envelope__back" aria-hidden="true">
+          <svg class="envelope__seams" viewBox="0 0 300 200" preserveAspectRatio="none">
+            <line x1="0" y1="200" x2="150" y2="100" stroke="#E8E2D8" stroke-width="1.2" />
+            <line x1="300" y1="200" x2="150" y2="100" stroke="#E8E2D8" stroke-width="1.2" />
+          </svg>
+        </span>
+        <span class="envelope__flap" aria-hidden="true">
+          <span class="envelope__flap-shadow"></span>
+        </span>
+        <span class="envelope__seal" aria-hidden="true">
+          <svg viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="24" fill="#C97B5C" />
+            <circle cx="30" cy="30" r="20" fill="none" stroke="rgba(250, 250, 247, 0.45)" stroke-width="0.6" stroke-dasharray="2 2" />
+            <text x="30" y="36" text-anchor="middle" fill="#FAFAF7" font-family="Fraunces, 'Noto Serif Georgian', serif" font-size="14" font-style="italic" font-weight="500" letter-spacing="0.5">G&amp;T</text>
+          </svg>
+        </span>
+      </button>
+      <p id="envelope-hint" class="envelope__hint serif-display">დააწექი მოწვევის გასახსნელად</p>
+    </div>
+  </div>
+
   <div id="loader" class="loader" aria-hidden="true">
     <svg class="loader__monogram" viewBox="0 0 120 60" fill="none" stroke="currentColor"
          stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -115,6 +139,68 @@
     </section>
     <section id="welcome" class="welcome section--alt">
       <hr class="divider-hair reveal" />
+      <svg class="welcome__couple reveal" viewBox="0 0 140 180" aria-hidden="true">
+        <!-- BRIDE -->
+        <g class="couple__bride">
+          <!-- Veil flowing back -->
+          <path class="couple__veil" d="M 47 48 C 32 70, 22 110, 24 158" />
+          <path class="couple__veil" d="M 50 52 C 38 75, 32 115, 34 160" />
+          <!-- Hair bun -->
+          <ellipse class="couple__hair" cx="55" cy="31" rx="4" ry="4.5" />
+          <!-- Head -->
+          <circle class="couple__head" cx="55" cy="44" r="10" />
+          <!-- Neck -->
+          <line class="couple__line" x1="55" y1="54" x2="55" y2="63" />
+          <!-- Shoulders -->
+          <path class="couple__line" d="M 41 70 C 47 64, 63 64, 69 70" />
+          <!-- Dress (A-line, flowing) -->
+          <path class="couple__line" d="M 41 70 C 41 70, 32 130, 28 165 L 82 165 C 78 130, 69 70, 69 70" />
+          <!-- Subtle waist hint -->
+          <line class="couple__waist" x1="46" y1="92" x2="64" y2="92" />
+          <!-- Bouquet -->
+          <g class="couple__bouquet" transform="translate(46, 100)">
+            <circle r="3" />
+            <circle cx="-3" cy="-1" r="2" />
+            <circle cx="3" cy="-1" r="2" />
+            <circle cx="0" cy="-4" r="1.8" />
+            <circle cx="-2" cy="2" r="1.5" />
+          </g>
+          <!-- Bouquet stem -->
+          <path class="couple__stem" d="M 46 103 L 44 114" />
+        </g>
+
+        <!-- GROOM -->
+        <g class="couple__groom">
+          <!-- Hair -->
+          <path class="couple__line" d="M 92 41 C 95 35, 105 35, 108 41" />
+          <!-- Head -->
+          <circle class="couple__head" cx="100" cy="46" r="10" />
+          <!-- Neck -->
+          <line class="couple__line" x1="100" y1="56" x2="100" y2="64" />
+          <!-- Shoulders -->
+          <path class="couple__line" d="M 86 72 C 92 66, 108 66, 114 72" />
+          <!-- Jacket outline -->
+          <path class="couple__line" d="M 86 72 L 84 132 L 116 132 L 114 72" />
+          <!-- Lapels V -->
+          <path class="couple__line" d="M 92 72 L 100 94 L 108 72" />
+          <!-- Button line -->
+          <line class="couple__waist" x1="100" y1="94" x2="100" y2="130" />
+          <!-- Buttons -->
+          <circle class="couple__button" cx="100" cy="104" r="0.8" />
+          <circle class="couple__button" cx="100" cy="114" r="0.8" />
+          <circle class="couple__button" cx="100" cy="124" r="0.8" />
+          <!-- Pants -->
+          <path class="couple__line" d="M 84 132 L 86 165" />
+          <path class="couple__line" d="M 116 132 L 114 165" />
+          <line class="couple__line" x1="100" y1="132" x2="100" y2="165" />
+          <!-- Shoes -->
+          <line class="couple__line" x1="83" y1="166" x2="92" y2="166" />
+          <line class="couple__line" x1="108" y1="166" x2="117" y2="166" />
+        </g>
+
+        <!-- Joined hands -->
+        <line class="couple__hands" x1="69" y1="98" x2="86" y2="98" />
+      </svg>
       <p class="welcome__sentence serif-display reveal">
         გვექნება დიდი სიხარული, თუ ჩვენთან ერთად აღნიშნავთ ცხოვრების ყველაზე მნიშვნელოვან დღეს.
       </p>
@@ -362,6 +448,7 @@
     <source src="audio/ambient.mp3" type="audio/mpeg" />
   </audio>
 
+  <script defer src="js/envelope.js"></script>
   <script defer src="js/reveal.js"></script>
   <script defer src="js/countdown.js"></script>
   <script defer src="js/rsvp.js"></script>
