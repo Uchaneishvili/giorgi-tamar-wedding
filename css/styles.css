@@ -209,20 +209,22 @@ section {
   inset: -20%;
   z-index: -1;
   background:
-    radial-gradient(55% 50% at 18% 25%, rgba(201, 123, 92, 0.32), transparent 75%),
-    radial-gradient(60% 55% at 82% 65%, rgba(122, 139, 106, 0.28), transparent 75%),
-    radial-gradient(70% 60% at 50% 95%, rgba(232, 192, 168, 0.45), transparent 80%),
-    radial-gradient(50% 45% at 90% 15%, rgba(245, 228, 211, 0.4), transparent 70%);
-  animation: hero-glow 30s ease-in-out infinite alternate;
+    radial-gradient(52% 48% at 16% 22%, rgba(201, 123, 92, 0.34), transparent 72%),
+    radial-gradient(48% 46% at 84% 28%, rgba(212, 93, 121, 0.26), transparent 72%),
+    radial-gradient(50% 50% at 88% 70%, rgba(122, 139, 106, 0.30), transparent 74%),
+    radial-gradient(46% 44% at 22% 78%, rgba(123, 166, 201, 0.28), transparent 72%),
+    radial-gradient(64% 56% at 50% 96%, rgba(232, 163, 61, 0.34), transparent 80%),
+    radial-gradient(40% 38% at 50% 10%, rgba(232, 155, 139, 0.30), transparent 70%);
+  animation: hero-glow 34s ease-in-out infinite alternate;
   pointer-events: none;
   will-change: transform, opacity;
   filter: blur(20px);
 }
 @keyframes hero-glow {
-  0%   { transform: translate(0%, 0%)   scale(1);    }
-  33%  { transform: translate(3%, -2%)  scale(1.08); }
-  66%  { transform: translate(-3%, 2%)  scale(1.04); }
-  100% { transform: translate(2%, 3%)   scale(1.06); }
+  0%   { transform: translate(0%, 0%)   scale(1);    filter: blur(20px) hue-rotate(-8deg); }
+  33%  { transform: translate(3%, -2%)  scale(1.08); filter: blur(20px) hue-rotate(6deg);  }
+  66%  { transform: translate(-3%, 2%)  scale(1.04); filter: blur(20px) hue-rotate(-4deg); }
+  100% { transform: translate(2%, 3%)   scale(1.06); filter: blur(20px) hue-rotate(10deg); }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero::before { animation: none; }
@@ -248,9 +250,22 @@ section {
 }
 .hero__amp {
   font-style: italic;
-  color: var(--accent);
+  color: var(--accent); /* fallback */
   font-size: 0.55em;
   line-height: 1;
+  background: linear-gradient(115deg, var(--accent), var(--bloom-fuchsia), var(--bloom-saffron));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: amp-shift 9s ease-in-out infinite alternate;
+}
+@keyframes amp-shift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__amp { animation: none; }
 }
 .hero__name {
   display: inline-block;
