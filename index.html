@@ -405,15 +405,20 @@
           <svg class="toss-scene" viewBox="0 0 480 240" aria-hidden="true">
             <line class="toss__ground" x1="20" y1="232" x2="460" y2="232" />
 
-            <!-- BRIDE (back view, throwing arm raised) — filled hero-style -->
+            <!-- BRIDE (front view, tossing back over her shoulder) — filled hero-style -->
             <g class="toss__bride">
-              <path class="hc-veil" d="M58 80 C40 124 34 196 38 232 L54 232 C56 196 54 116 62 86 Z" />
+              <path class="hc-veil" d="M58 82 C38 122 32 196 36 232 L52 232 C55 196 52 116 60 88 Z" />
+              <!-- long hair falling down both sides (behind head) -->
+              <path class="hc-hair" d="M45 70 C39 110 43 150 51 154 C47 120 49 94 58 86 C67 94 69 120 65 154 C73 150 77 110 71 70 C68 58 48 58 45 70 Z" />
               <path class="hc-gown" d="M42 104 C34 148 28 200 32 232 L84 232 C82 200 76 148 70 104 Z" />
               <path class="hc-gown" d="M48 106 C46 90 50 82 58 82 C66 82 70 90 68 106 Z" />
-              <circle class="hc-hair" cx="58" cy="70" r="11" />
-              <path class="hc-hair" d="M48 72 C43 112 45 154 53 156 L63 156 C71 154 73 112 68 72 C64 80 52 80 48 72 Z" />
-              <path class="hc-skin" d="M68 100 C80 78 86 52 89 33 L93 35 C90 56 84 84 75 104 Z" />
-              <circle class="hc-skin" cx="90" cy="33" r="3.5" />
+              <!-- face (front) -->
+              <circle class="hc-head" cx="58" cy="70" r="11" />
+              <!-- fringe over the top of the head -->
+              <path class="hc-hair" d="M47 71 C47 55 52 49 58 49 C64 49 69 55 69 71 C66 61 62 58 58 58 C54 58 50 62 47 71 Z" />
+              <!-- raised arm tossing back over the shoulder + bouquet hand -->
+              <path class="hc-skin" d="M70 100 C82 78 87 52 90 33 L94 35 C91 56 85 84 77 104 Z" />
+              <circle class="hc-skin" cx="91" cy="33" r="3.5" />
             </g>
 
             <!-- BOUQUET (animated along arc via SMIL) -->
