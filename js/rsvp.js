@@ -12,6 +12,7 @@
   const success  = document.getElementById('rsvp-success');
   const errorBox = document.getElementById('rsvp-error');
   const nameOut  = success ? success.querySelector('[data-name]') : null;
+  const bodyOut  = success ? success.querySelector('.rsvp__success-body') : null;
 
   if (!form) return;
 
@@ -19,8 +20,8 @@
   const prev = sessionStorage.getItem(SESSION_KEY);
   if (prev) {
     try {
-      const { name } = JSON.parse(prev);
-      revealSuccess(name);
+      const { name, attending } = JSON.parse(prev);
+      revealSuccess(name, attending);
     } catch (_) { /* ignore */ }
   }
 
@@ -32,9 +33,14 @@
     });
   }
 
-  function revealSuccess(name) {
+  function revealSuccess(name, attending) {
     form.classList.add('is-gone');
     if (nameOut) nameOut.textContent = name;
+    if (bodyOut) {
+      bodyOut.textContent = attending === false
+        ? 'ვწუხვართ, რომ ვერ შეძლებთ. გმადლობთ, რომ გვაცნობეთ.'
+        : 'რა კარგია — მოუთმენლად გელით ჩვენს დღესასწაულზე!';
+    }
     if (success) {
       success.hidden = false;
       requestAnimationFrame(() => success.classList.add('is-shown'));
@@ -61,7 +67,7 @@
 
     const name = (input.value || '').trim();
     if (!name) {
-      setHelp('გთხოვთ შეიყვანოთ სახელი');
+      setHelp('გთხოვთ, მიუთითეთ სახელი და გვარი');
       input.focus();
       return;
     }
@@ -86,7 +92,7 @@
 
       if (result && result.ok) {
         sessionStorage.setItem(SESSION_KEY, JSON.stringify({ name, attending }));
-        revealSuccess(name);
+        revealSuccess(name, attending);
         // Celebrate a "yes" with a petal burst from the confirmation
         if (attending && typeof window.bloomConfetti === 'function') {
           requestAnimationFrame(() => {
