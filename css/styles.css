@@ -1277,6 +1277,11 @@ body.is-sealed {
 .arch__vine .vine__flower > circle:first-child { stroke: var(--flower-c); fill: none; stroke-width: 1; }
 .arch__vine .vine__flower > circle.dot { fill: var(--flower-c); stroke: none; }
 
+/* White roses on the arch */
+.arch__vine .vine__rose .rose-o { fill: #FFFFFF; stroke: rgba(122, 139, 106, 0.5); stroke-width: 0.5; }
+.arch__vine .vine__rose .rose-i { fill: #FBF5EF; stroke: rgba(201, 123, 92, 0.35); stroke-width: 0.4; }
+.arch__vine .vine__rose .rose-c { fill: #E8D8C8; stroke: none; }
+
 .arch__vine > g {
   opacity: 0;
   transform-box: fill-box;
