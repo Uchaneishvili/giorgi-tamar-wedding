@@ -1032,11 +1032,23 @@ body.is-sealed {
 }
 
 /* ─── Ceremony scene (couple + bearded priest) ───────────────────────────── */
+/* Equal-height scene box so the time + venue line up across both cards,
+   regardless of each scene's intrinsic aspect ratio */
+.event__scene {
+  width: 100%;
+  height: clamp(150px, 24vw, 200px);
+  margin: 4px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .ceremony-scene {
   display: block;
-  width: clamp(200px, 38vw, 280px);
+  width: auto;
   height: auto;
-  margin: 4px auto 20px;
+  max-width: 100%;
+  max-height: 100%;
   color: var(--ink);
 }
 .ceremony-scene .priest__line,
@@ -1075,9 +1087,10 @@ body.is-sealed {
 /* ─── Bouquet toss scene (inside Wedding event card) ─────────────────────── */
 .toss-scene {
   display: block;
-  width: clamp(220px, 40vw, 320px);
+  width: auto;
   height: auto;
-  margin: 4px auto 20px;
+  max-width: 100%;
+  max-height: 100%;
   color: var(--ink);
   overflow: visible;
 }
