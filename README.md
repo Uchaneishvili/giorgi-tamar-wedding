@@ -2,7 +2,7 @@
 
 A single-page wedding invitation site for **გიორგი & თამარი**, 12 ივლისი 2026.
 
-Live URL: _set after deploy_
+Live URL: https://giorgi-tamar-wedding.vercel.app (Vercel, static)
 
 ## Stack
 
