@@ -41,12 +41,14 @@ function _style(sh) {
   sh.setColumnWidth(3, 110);
   sh.setColumnWidth(4, 90);
 
-  // attendance as centered checkboxes
-  sh.getRange(2, 3, sh.getMaxRows() - 1, 1).insertCheckboxes().setHorizontalAlignment('center');
-
-  // no striping — header coloured only, data rows stay white
+  // no striping — header coloured only, data rows plain (white bg, black text)
   sh.getBandings().forEach(function (b) { b.remove(); });
-  sh.getRange(2, 1, sh.getMaxRows() - 1, HEADERS.length).setBackground('#FFFFFF');
+  sh.getRange(2, 1, sh.getMaxRows() - 1, HEADERS.length)
+    .setBackground('#FFFFFF').setFontColor('#000000').setFontWeight('normal')
+    .setHorizontalAlignment('left');
+
+  // attendance as centered checkboxes (after the reset, so centering sticks)
+  sh.getRange(2, 3, sh.getMaxRows() - 1, 1).insertCheckboxes().setHorizontalAlignment('center');
 }
 
 function doPost(e) {
@@ -63,8 +65,12 @@ function doPost(e) {
     const ts = Utilities.formatDate(new Date(), 'Asia/Tbilisi', 'dd.MM.yyyy HH:mm');
     const sh = _sheet();
     sh.insertRowAfter(1); // newest first — add just under the header
-    sh.getRange(2, 1, 1, HEADERS.length).setValues([[ts, name, data.attending, 'web']]);
-    sh.getRange(2, 3).insertCheckboxes();
+    const row = sh.getRange(2, 1, 1, HEADERS.length);
+    row.setValues([[ts, name, data.attending, 'web']]);
+    // a fresh row inherits the header's style — reset it to plain
+    row.setBackground('#FFFFFF').setFontColor('#000000')
+       .setFontWeight('normal').setHorizontalAlignment('left');
+    sh.getRange(2, 3).insertCheckboxes().setHorizontalAlignment('center');
     return _json({ ok: true });
   } catch (err) {
     console.error(err);
@@ -73,7 +79,7 @@ function doPost(e) {
 }
 
 function doGet() {
-  return _json({ ok: true, service: 'rsvp', version: 4 });
+  return _json({ ok: true, service: 'rsvp', version: 5 });
 }
 
 function _json(body) {
