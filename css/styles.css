@@ -624,6 +624,9 @@ body.is-sealed {
 
 /* Countdown section */
 .countdown { text-align: center; }
+/* tighten the gap between welcome and countdown */
+#welcome   { padding-bottom: clamp(40px, 6vh, 84px); }
+#countdown { padding-top: clamp(40px, 6vh, 84px); }
 .countdown__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -778,7 +781,11 @@ body.is-sealed {
   flex-direction: column;
   align-items: center;
 }
-.event__label { margin: 0 0 16px; }
+.event__label {
+  margin: 0 0 16px;
+  font-size: clamp(17px, 4vw, 26px);
+  letter-spacing: 0.1em;
+}
 .event:nth-of-type(1) .event__label { color: var(--accent); }
 .event:nth-of-type(2) .event__label { color: var(--bloom-fuchsia); }
 .event__map { margin-top: auto; }
