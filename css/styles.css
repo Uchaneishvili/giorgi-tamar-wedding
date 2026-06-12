@@ -40,6 +40,7 @@
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+html { overflow-x: clip; }       /* guard against any stray horizontal scroll on mobile */
 html { -webkit-text-size-adjust: 100%; }
 
 body {
@@ -1181,6 +1182,11 @@ body.is-sealed {
   .hero__sprig { width: 50px; }
   .hero__sprig--tl { top: 20px; left: 20px; }
   .hero__sprig--br { bottom: 20px; right: 20px; }
+
+  /* tighter hero rhythm so couple + names + date sit comfortably on phones */
+  .hero { gap: clamp(10px, 1.8vh, 16px); }
+  .hero__couple { width: clamp(118px, 34vw, 160px); margin-bottom: 2px; }
+  .hero__names { font-size: clamp(40px, 11vw, 66px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1236,6 +1242,34 @@ body.is-sealed {
 .hero__sprig .leaf,
 .footer__branch .leaf {
   stroke: var(--sage);
+}
+
+/* ── Colourful blooms on the remaining line ornaments ─────────────────── */
+/* Hero corner sprigs — petals + centre get garden hues */
+.hero__sprig--tl ellipse { fill: var(--bloom-blush);  stroke: var(--bloom-blush); }
+.hero__sprig--tl > circle { fill: var(--bloom-fuchsia); }
+.hero__sprig--br ellipse { fill: var(--bloom-saffron); stroke: var(--bloom-saffron); }
+.hero__sprig--br > circle { fill: var(--bloom-peri); }
+.hero.is-ready .hero__sprig { opacity: 0.7; }
+@media (prefers-reduced-motion: reduce) { .hero__sprig { opacity: 0.7; } }
+
+/* Footer branch tips bloom in colour */
+.footer__branch--left  circle { fill: var(--bloom-fuchsia); }
+.footer__branch--right circle { fill: var(--bloom-saffron); }
+
+/* Bouquet-toss catchers become three colourful guests */
+.toss-scene > g:nth-of-type(3) { color: var(--bloom-fuchsia); }
+.toss-scene > g:nth-of-type(4) { color: var(--bloom-peri); }
+.toss-scene > g:nth-of-type(5) { color: var(--bloom-saffron); }
+
+/* Ceremony couple gains warmth — skin, hair, tinted attire */
+.ceremony-scene .couple__head { fill: #EAC6A0; }
+.ceremony-scene .couple__hair { fill: #3E2B22; stroke: #3E2B22; }
+.ceremony-scene .couple__dress  { fill: color-mix(in oklab, var(--bloom-blush) 42%, transparent); }
+.ceremony-scene .couple__jacket { fill: color-mix(in oklab, var(--bloom-plum) 38%, transparent); }
+@supports not (color: color-mix(in oklab, red, blue)) {
+  .ceremony-scene .couple__dress  { fill: #F3D7D0; }
+  .ceremony-scene .couple__jacket { fill: #C9BBD0; }
 }
 
 @media (max-width: 480px) {
