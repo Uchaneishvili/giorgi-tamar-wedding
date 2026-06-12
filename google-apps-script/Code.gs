@@ -44,13 +44,9 @@ function _style(sh) {
   // attendance as centered checkboxes
   sh.getRange(2, 3, sh.getMaxRows() - 1, 1).insertCheckboxes().setHorizontalAlignment('center');
 
-  // zebra striping
+  // no striping — header coloured only, data rows stay white
   sh.getBandings().forEach(function (b) { b.remove(); });
-  sh.getRange(1, 1, sh.getMaxRows(), HEADERS.length)
-    .applyRowBanding(SpreadsheetApp.BandingTheme.LIGHT_GREY, true, false);
-
-  // re-assert header style (banding can recolour row 1)
-  header.setBackground('#C97B5C').setFontColor('#FFFFFF').setFontWeight('bold');
+  sh.getRange(2, 1, sh.getMaxRows() - 1, HEADERS.length).setBackground('#FFFFFF');
 }
 
 function doPost(e) {
