@@ -626,13 +626,10 @@ body.is-sealed {
 .countdown { text-align: center; }
 .countdown__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(4px, 1.6vw, 24px);
   max-width: 720px;
   margin: 0 auto;
-}
-@media (min-width: 768px) {
-  .countdown__grid { grid-template-columns: repeat(4, 1fr); }
 }
 .countdown__cell {
   display: flex;
@@ -672,7 +669,7 @@ body.is-sealed {
 }
 .countdown__value {
   font-family: var(--font-display);
-  font-size: clamp(56px, 9vw, 96px);
+  font-size: clamp(30px, 9.5vw, 96px);
   font-weight: 400;
   font-variant-numeric: tabular-nums;
   line-height: 1;
