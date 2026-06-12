@@ -277,6 +277,8 @@ section {
    (same visual language as the hero couple) */
 .hc-robe  { fill: url(#robeGrad); }
 .hc-mitre { fill: url(#mitreGrad); }
+.hc-crown { fill: url(#mitreGrad); }
+.hc-crown-cross { stroke: #8A5A1E; stroke-width: 1.4; stroke-linecap: round; fill: none; }
 .hc-beard { fill: #CFC8BD; }
 .hc-hand  { fill: #EAC6A0; }
 .hc-stole { fill: color-mix(in oklab, var(--bloom-saffron) 78%, #FFFFFF); opacity: 0.9; }
