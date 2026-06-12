@@ -437,14 +437,24 @@
                 keyTimes="0;0.78;0.82;0.92;0.99;1"
                 dur="4s"
                 repeatCount="indefinite" />
-              <circle class="toss__petal" r="5" />
-              <circle class="toss__petal" cx="-4" cy="-2" r="3.2" />
-              <circle class="toss__petal" cx="4" cy="-2" r="3.2" />
-              <circle class="toss__petal" cx="0" cy="-5" r="2.8" />
-              <circle class="toss__petal" cx="-2" cy="3" r="2.6" />
-              <circle class="toss__petal" cx="3" cy="3" r="2.6" />
-              <path class="toss__leaf" d="M -6 1 L -9 -2" />
-              <path class="toss__leaf" d="M 6 2 L 9 -1" />
+              <!-- inner group only scales: big near the bride, shrinks as it flies away -->
+              <g>
+                <animateTransform
+                  attributeName="transform"
+                  type="scale"
+                  values="1.7;0.45;0.45;1.7"
+                  keyTimes="0;0.78;0.95;1"
+                  dur="4s"
+                  repeatCount="indefinite" />
+                <circle class="toss__petal" r="5" />
+                <circle class="toss__petal" cx="-4" cy="-2" r="3.2" />
+                <circle class="toss__petal" cx="4" cy="-2" r="3.2" />
+                <circle class="toss__petal" cx="0" cy="-5" r="2.8" />
+                <circle class="toss__petal" cx="-2" cy="3" r="2.6" />
+                <circle class="toss__petal" cx="3" cy="3" r="2.6" />
+                <path class="toss__leaf" d="M -6 1 L -9 -2" />
+                <path class="toss__leaf" d="M 6 2 L 9 -1" />
+              </g>
             </g>
 
             <!-- CATCHERS (3 filled, colourful guests reaching up) -->
