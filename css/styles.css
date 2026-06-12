@@ -1277,10 +1277,18 @@ body.is-sealed {
 .arch__vine .vine__flower > circle:first-child { stroke: var(--flower-c); fill: none; stroke-width: 1; }
 .arch__vine .vine__flower > circle.dot { fill: var(--flower-c); stroke: none; }
 
-/* White roses on the arch (real bloom shape via #rose symbol) */
-.rose-petal  { fill: #FFFFFF; stroke: rgba(122, 139, 106, 0.4); stroke-width: 0.35; }
-.rose-center { fill: #FCF7F1; stroke: none; }
-.rose-swirl  { fill: none; stroke: rgba(201, 123, 92, 0.6); stroke-width: 0.7; stroke-linecap: round; }
+/* Roses on the arch (real bloom shape via #rose symbol; colour via vars) */
+.rose-petal  { fill: var(--rose-fill, #FFFFFF); stroke: var(--rose-stroke, rgba(122, 139, 106, 0.4)); stroke-width: 0.35; }
+.rose-center { fill: var(--rose-core, #FCF7F1); stroke: none; }
+.rose-swirl  { fill: none; stroke: var(--rose-swirl-c, rgba(201, 123, 92, 0.6)); stroke-width: 0.7; stroke-linecap: round; }
+
+/* red rose variant (custom props inherit through the <use> shadow) */
+.vine__rose--red {
+  --rose-fill: #C24A45;
+  --rose-stroke: rgba(120, 28, 26, 0.45);
+  --rose-core: #95302C;
+  --rose-swirl-c: rgba(74, 18, 16, 0.75);
+}
 
 .arch__vine > g {
   opacity: 0;
