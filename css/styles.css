@@ -58,6 +58,7 @@ body {
    Each section advertises its tint; an IntersectionObserver (sections.js)
    lifts the active one onto <body>, so accents that read var(--section-tint)
    shift hue as the reader travels down the page. */
+#hero      { --section-tint: var(--accent); }
 #welcome   { --section-tint: var(--bloom-blush); }
 #countdown { --section-tint: var(--bloom-saffron); }
 #events    { --section-tint: var(--bloom-peri); }
@@ -741,11 +742,18 @@ body.is-sealed {
   overflow: hidden;
 }
 .btn--solid {
-  background: var(--accent);
-  color: var(--bg);
-  border: 1px solid var(--accent);
+  background: var(--grad-warm);
+  background-size: 180% 180%;
+  background-position: 0% 50%;
+  color: #FFF;
+  border: 1px solid transparent;
+  transition: transform 200ms var(--ease-out), background-position 500ms var(--ease-out),
+              box-shadow 200ms var(--ease-out);
 }
-.btn--solid:hover { background: #b66948; border-color: #b66948; }
+.btn--solid:hover {
+  background-position: 100% 50%;
+  box-shadow: 0 8px 22px rgba(201, 123, 92, 0.28);
+}
 .btn--outline {
   background: transparent;
   color: var(--ink);
@@ -875,17 +883,17 @@ body.is-sealed {
     position: fixed;
     top: 0; left: 0;
     width: 24px; height: 24px;
-    border: 1px solid var(--ink);
+    border: 1.5px solid var(--section-tint);
     border-radius: 50%;
     pointer-events: none;
     transform: translate3d(-50%, -50%, 0);
-    transition: width 200ms var(--ease-out), height 200ms var(--ease-out), opacity 200ms var(--ease-out);
+    transition: width 200ms var(--ease-out), height 200ms var(--ease-out),
+                opacity 200ms var(--ease-out), border-color 600ms var(--ease-out);
     z-index: 9998;
     opacity: 0;
-    mix-blend-mode: difference;
   }
-  .cursor-ring.is-active { opacity: 1; }
-  .cursor-ring.is-hover { width: 40px; height: 40px; }
+  .cursor-ring.is-active { opacity: 0.8; }
+  .cursor-ring.is-hover { width: 40px; height: 40px; opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .cursor-ring { display: none !important; }
@@ -1057,7 +1065,7 @@ body.is-sealed {
   width: 96px;
   height: auto;
   margin: 32px auto;
-  color: var(--accent);
+  color: var(--section-tint);
   opacity: 0;
   transition: opacity 700ms var(--ease-out);
 }
@@ -1073,7 +1081,7 @@ body.is-sealed {
   width: clamp(120px, 18vw, 180px);
   height: auto;
   margin: -40px auto clamp(56px, 8vw, 88px);
-  color: var(--accent);
+  color: var(--section-tint);
   opacity: 0;
   transition: opacity 800ms var(--ease-out);
 }
