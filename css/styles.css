@@ -126,11 +126,22 @@ section {
 }
 
 .divider-hair {
-  width: 80px;
+  width: 120px;
   height: 1px;
-  background: var(--line);
+  background: linear-gradient(90deg, transparent, var(--section-tint), transparent);
   margin: 32px auto;
   border: 0;
+  opacity: 0.7;
+}
+
+/* Soft colour halo washing each lower section — keeps the cream base,
+   adds an ambient bloom of the section's own tint behind the content. */
+#welcome, #countdown, #events, #rsvp {
+  background-image: radial-gradient(72% 58% at 50% 40%,
+    color-mix(in oklab, var(--section-tint) 26%, transparent), transparent 75%);
+}
+@supports not (color: color-mix(in oklab, red, blue)) {
+  #welcome, #countdown, #events, #rsvp { background-image: none; }
 }
 
 /* Scroll-reveal base state (Task 5 toggles .is-visible) */
@@ -703,6 +714,8 @@ body.is-sealed {
   align-items: center;
 }
 .event__label { margin: 0 0 16px; }
+.event:nth-of-type(1) .event__label { color: var(--accent); }
+.event:nth-of-type(2) .event__label { color: var(--bloom-fuchsia); }
 .event__map { margin-top: auto; }
 .event__time {
   font-size: clamp(48px, 6vw, 72px);
@@ -771,7 +784,7 @@ body.is-sealed {
   color: var(--ink);
   transition: border-color 200ms var(--ease-out);
 }
-.rsvp__input:focus { outline: none; border-color: var(--accent); }
+.rsvp__input:focus { outline: none; border-color: var(--section-tint); }
 .rsvp__help { min-height: 16px; margin: 0; color: var(--accent); text-transform: none; letter-spacing: 0; }
 
 .rsvp__actions {
@@ -848,7 +861,7 @@ body.is-sealed {
   transform-style: preserve-3d;
 }
 .rsvp__success.is-shown { opacity: 1; transform: rotateX(0deg); }
-.rsvp__check { width: 56px; height: 56px; color: var(--accent); }
+.rsvp__check { width: 56px; height: 56px; color: var(--section-tint); }
 .rsvp__success-title { font-size: clamp(22px, 3vw, 28px); margin: 0; }
 .rsvp__success-body { color: var(--ink-soft); margin: 0; }
 
