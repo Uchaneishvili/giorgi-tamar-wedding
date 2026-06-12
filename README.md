@@ -15,7 +15,7 @@ Live URL: _set after deploy_
 ```
 index.html              page
 css/                    styles + font imports
-js/                     countdown, RSVP, reveal, music, cursor, main
+js/                     countdown, RSVP, reveal, music, cursor, confetti, petals, sections, main
 image/                  monogram + story photos
 audio/                  ambient.mp3 (background music)
 google-apps-script/     Apps Script files + deploy README

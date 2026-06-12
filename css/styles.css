@@ -923,8 +923,8 @@ body.is-sealed {
   stroke-linejoin: round;
 }
 .ceremony-scene .priest__cross {
-  stroke: var(--accent);
-  stroke-width: 1.2;
+  stroke: var(--bloom-saffron);
+  stroke-width: 1.3;
   animation: priest-cross-glow 3s ease-in-out infinite;
 }
 .ceremony-scene .priest__hand {

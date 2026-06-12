@@ -569,14 +569,21 @@
           <circle cx="4" cy="12" r="1.2" fill="currentColor" />
         </svg>
         <svg class="footer__monogram" viewBox="0 0 120 60" aria-hidden="true">
+          <defs>
+            <linearGradient id="monoGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#C97B5C" />
+              <stop offset="50%" stop-color="#D45D79" />
+              <stop offset="100%" stop-color="#E8A33D" />
+            </linearGradient>
+          </defs>
           <path d="M 38 18 Q 22 18, 22 32 Q 22 46, 38 46 L 38 36 L 30 36"
-                fill="none" stroke="currentColor" stroke-width="1.25"
+                fill="none" stroke="url(#monoGrad)" stroke-width="1.25"
                 stroke-linecap="round" stroke-linejoin="round" />
           <path d="M 56 22 Q 62 16, 70 22 M 60 22 L 60 46"
-                fill="none" stroke="currentColor" stroke-width="1.25"
+                fill="none" stroke="url(#monoGrad)" stroke-width="1.25"
                 stroke-linecap="round" stroke-linejoin="round" />
           <path d="M 82 18 L 100 18 L 91 18 L 91 46"
-                fill="none" stroke="currentColor" stroke-width="1.25"
+                fill="none" stroke="url(#monoGrad)" stroke-width="1.25"
                 stroke-linecap="round" stroke-linejoin="round" />
         </svg>
         <svg class="footer__branch footer__branch--right" viewBox="0 0 80 24" aria-hidden="true"
