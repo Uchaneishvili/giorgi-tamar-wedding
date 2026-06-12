@@ -402,17 +402,15 @@
           <svg class="toss-scene" viewBox="0 0 480 240" aria-hidden="true">
             <line class="toss__ground" x1="20" y1="232" x2="460" y2="232" />
 
-            <!-- BRIDE (back view, throwing arm raised) -->
+            <!-- BRIDE (back view, throwing arm raised) — filled hero-style -->
             <g class="toss__bride">
-              <path class="toss__veil" d="M 50 80 C 30 120, 22 180, 26 230" />
-              <path class="toss__veil" d="M 56 86 C 40 125, 32 185, 38 232" />
-              <ellipse cx="62" cy="56" rx="4.5" ry="5" />
-              <circle cx="62" cy="70" r="10" />
-              <line x1="62" y1="80" x2="62" y2="88" />
-              <path d="M 48 95 C 54 88, 70 88, 76 95" />
-              <path d="M 48 95 L 38 232 L 82 232 L 76 95" />
-              <path d="M 76 95 Q 86 60, 90 32" />
-              <circle class="toss__hand" cx="90" cy="32" r="2" />
+              <path class="hc-veil" d="M58 80 C40 124 34 196 38 232 L54 232 C56 196 54 116 62 86 Z" />
+              <path class="hc-gown" d="M42 104 C34 148 28 200 32 232 L84 232 C82 200 76 148 70 104 Z" />
+              <path class="hc-gown" d="M48 106 C46 90 50 82 58 82 C66 82 70 90 68 106 Z" />
+              <circle class="hc-hair" cx="58" cy="70" r="11" />
+              <path class="hc-hair" d="M48 72 C43 112 45 154 53 156 L63 156 C71 154 73 112 68 72 C64 80 52 80 48 72 Z" />
+              <path class="hc-skin" d="M68 100 C80 78 86 52 89 33 L93 35 C90 56 84 84 75 104 Z" />
+              <circle class="hc-skin" cx="90" cy="33" r="3.5" />
             </g>
 
             <!-- BOUQUET (animated along arc via SMIL) -->
@@ -441,41 +439,35 @@
               <path class="toss__leaf" d="M 6 2 L 9 -1" />
             </g>
 
-            <!-- CATCHERS (3 figures) -->
+            <!-- CATCHERS (3 filled, colourful guests reaching up) -->
             <g class="toss__catcher" style="--i:0">
-              <circle cx="305" cy="118" r="8" />
-              <path d="M 297 113 Q 305 108, 313 113" />
-              <line x1="305" y1="126" x2="305" y2="135" />
-              <path d="M 293 140 C 299 134, 311 134, 317 140" />
-              <path d="M 293 140 L 289 232 L 321 232 L 317 140" />
-              <path d="M 297 138 Q 295 100, 298 78" />
-              <path d="M 313 138 Q 315 100, 312 78" />
-              <circle class="toss__hand" cx="298" cy="78" r="1.5" />
-              <circle class="toss__hand" cx="312" cy="78" r="1.5" />
+              <path class="cat-gown-a" d="M304 148 C300 182 294 232 294 232 L342 232 C342 200 336 182 332 148 Z" />
+              <path class="hc-skin" d="M306 150 C301 112 306 90 311 85 L314 88 C309 98 310 124 311 150 Z" />
+              <path class="hc-skin" d="M330 150 C335 112 330 90 325 85 L322 88 C327 98 326 124 325 150 Z" />
+              <circle class="hc-hand" cx="311" cy="84" r="2.6" />
+              <circle class="hc-hand" cx="325" cy="84" r="2.6" />
+              <circle class="hc-head" cx="318" cy="120" r="9" />
+              <path class="hc-hair" d="M309 120 C309 108 313 104 318 104 C323 104 327 109 327 120 C324 113 312 113 309 120 Z" />
             </g>
 
             <g class="toss__catcher" style="--i:1">
-              <circle cx="365" cy="125" r="7" />
-              <path d="M 358 120 Q 365 116, 372 120" />
-              <line x1="365" y1="132" x2="365" y2="140" />
-              <path d="M 354 145 C 359 140, 371 140, 376 145" />
-              <path d="M 354 145 L 351 232 L 379 232 L 376 145" />
-              <path d="M 357 143 Q 354 105, 357 86" />
-              <path d="M 373 143 Q 376 105, 373 86" />
-              <circle class="toss__hand" cx="357" cy="86" r="1.5" />
-              <circle class="toss__hand" cx="373" cy="86" r="1.5" />
+              <path class="cat-gown-b" d="M364 150 C360 184 354 232 354 232 L402 232 C402 200 396 184 392 150 Z" />
+              <path class="hc-skin" d="M367 152 C362 116 367 96 372 91 L375 94 C370 104 371 128 372 152 Z" />
+              <path class="hc-skin" d="M389 152 C394 116 389 96 384 91 L381 94 C386 104 385 128 384 152 Z" />
+              <circle class="hc-hand" cx="372" cy="90" r="2.4" />
+              <circle class="hc-hand" cx="384" cy="90" r="2.4" />
+              <circle class="hc-head" cx="378" cy="123" r="8" />
+              <path class="hc-hair" d="M370 123 C370 112 374 108 378 108 C382 108 386 112 386 123 C383 117 373 117 370 123 Z" />
             </g>
 
             <g class="toss__catcher" style="--i:2">
-              <circle cx="420" cy="120" r="8" />
-              <path d="M 412 115 Q 420 110, 428 115" />
-              <line x1="420" y1="128" x2="420" y2="137" />
-              <path d="M 408 142 C 414 136, 426 136, 432 142" />
-              <path d="M 408 142 L 404 232 L 436 232 L 432 142" />
-              <path d="M 412 140 Q 410 102, 413 82" />
-              <path d="M 428 140 Q 430 102, 427 82" />
-              <circle class="toss__hand" cx="413" cy="82" r="1.5" />
-              <circle class="toss__hand" cx="427" cy="82" r="1.5" />
+              <path class="cat-gown-c" d="M419 148 C415 180 409 232 409 232 L457 232 C457 200 451 180 447 148 Z" />
+              <path class="hc-skin" d="M421 150 C416 112 421 90 426 85 L429 88 C424 98 425 124 426 150 Z" />
+              <path class="hc-skin" d="M445 150 C450 112 445 90 440 85 L437 88 C442 98 441 124 440 150 Z" />
+              <circle class="hc-hand" cx="426" cy="84" r="2.6" />
+              <circle class="hc-hand" cx="440" cy="84" r="2.6" />
+              <circle class="hc-head" cx="433" cy="120" r="9" />
+              <path class="hc-hair" d="M424 120 C424 108 428 104 433 104 C438 104 442 109 442 120 C439 113 427 113 424 120 Z" />
             </g>
           </svg>
           <p class="event__time serif-display">19:00</p>
