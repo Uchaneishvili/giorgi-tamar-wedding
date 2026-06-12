@@ -7,6 +7,20 @@
   --sage:   #7A8B6A;
   --line: #E8E2D8;
 
+  /* ── Blooming-garden palette ─────────────────────────────────────────── */
+  --bloom-saffron: #E8A33D;  /* marigold / saffron */
+  --bloom-blush:   #E89B8B;  /* soft rose */
+  --bloom-fuchsia: #D45D79;  /* magenta petals */
+  --bloom-peri:    #7BA6C9;  /* periwinkle sky */
+  --bloom-plum:    #6B4E71;  /* depth / contrast */
+
+  --grad-warm:  linear-gradient(135deg, var(--accent), var(--bloom-saffron));
+  --grad-bloom: linear-gradient(135deg, var(--bloom-fuchsia), var(--bloom-blush));
+  --grad-fresh: linear-gradient(135deg, var(--sage), var(--bloom-peri));
+
+  /* Active section tint — interpolated as the reader scrolls (set on body) */
+  --section-tint: var(--accent);
+
   --font-display: 'Fraunces', 'Noto Serif Georgian', Georgia, serif;
   --font-body: 'Inter', 'Noto Sans Georgian', system-ui, sans-serif;
 
@@ -15,6 +29,13 @@
   --read-max: 640px;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Registered so the active tint can animate smoothly between sections */
+@property --section-tint {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #C97B5C;
 }
 
 * { box-sizing: border-box; }
@@ -30,7 +51,18 @@ body {
   font-feature-settings: 'kern', 'liga', 'calt';
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  transition: --section-tint 900ms var(--ease-out);
 }
+
+/* ── Per-section colour identity ──────────────────────────────────────────
+   Each section advertises its tint; an IntersectionObserver (sections.js)
+   lifts the active one onto <body>, so accents that read var(--section-tint)
+   shift hue as the reader travels down the page. */
+#welcome   { --section-tint: var(--bloom-blush); }
+#countdown { --section-tint: var(--bloom-saffron); }
+#events    { --section-tint: var(--bloom-peri); }
+#rsvp      { --section-tint: var(--bloom-fuchsia); }
+#footer    { --section-tint: var(--bloom-plum); }
 
 @media (min-width: 768px) {
   body { font-size: 16px; }
@@ -459,6 +491,36 @@ body.is-sealed {
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  --cell-c: var(--accent);
+  position: relative;
+}
+.countdown__cell:nth-child(1) { --cell-c: var(--accent); }
+.countdown__cell:nth-child(2) { --cell-c: var(--bloom-saffron); }
+.countdown__cell:nth-child(3) { --cell-c: var(--bloom-blush); }
+.countdown__cell:nth-child(4) { --cell-c: var(--bloom-peri); }
+
+.countdown__cell .countdown__label { color: var(--cell-c); }
+
+/* A small living bloom beneath each unit */
+.countdown__cell::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cell-c);
+  opacity: 0.8;
+  animation: bloom-pulse 2600ms ease-in-out infinite;
+  animation-delay: calc(var(--cd-i, 0) * 320ms);
+}
+.countdown__cell:nth-child(2)::after { --cd-i: 1; }
+.countdown__cell:nth-child(3)::after { --cd-i: 2; }
+.countdown__cell:nth-child(4)::after { --cd-i: 3; }
+@keyframes bloom-pulse {
+  0%, 100% { transform: scale(0.7); opacity: 0.5; }
+  50%      { transform: scale(1);   opacity: 0.9; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .countdown__cell::after { animation: none; }
 }
 .countdown__value {
   font-family: var(--font-display);
@@ -473,13 +535,18 @@ body.is-sealed {
   transform-style: preserve-3d;
 }
 .countdown__value.is-flipping {
-  animation: digit-flip 400ms var(--ease-out);
+  animation: digit-flip 400ms var(--ease-out), digit-tint 400ms var(--ease-out);
 }
 @keyframes digit-flip {
   0%   { transform: rotateX(0deg);  }
   50%  { transform: rotateX(90deg); }
   51%  { transform: rotateX(-90deg); }
   100% { transform: rotateX(0deg);  }
+}
+/* Brief colour bloom as the digit turns, then settle back to ink */
+@keyframes digit-tint {
+  0%, 100% { color: var(--ink); }
+  50%      { color: var(--cell-c); }
 }
 @media (prefers-reduced-motion: reduce) {
   .countdown__value.is-flipping { animation: none; }
@@ -885,6 +952,11 @@ body.is-sealed {
   stroke: none;
   opacity: 0.9;
 }
+.toss__petal:nth-of-type(2) { fill: var(--bloom-fuchsia); }
+.toss__petal:nth-of-type(3) { fill: var(--bloom-saffron); }
+.toss__petal:nth-of-type(4) { fill: var(--bloom-blush); }
+.toss__petal:nth-of-type(5) { fill: var(--bloom-peri); }
+.toss__petal:nth-of-type(6) { fill: var(--bloom-fuchsia); }
 .toss__leaf {
   stroke: var(--sage);
   stroke-width: 0.9;
@@ -933,8 +1005,12 @@ body.is-sealed {
 .couple__bouquet circle {
   fill: var(--accent);
   stroke: none;
-  opacity: 0.85;
+  opacity: 0.9;
 }
+.couple__bouquet circle:nth-child(2) { fill: var(--bloom-fuchsia); }
+.couple__bouquet circle:nth-child(3) { fill: var(--bloom-saffron); }
+.couple__bouquet circle:nth-child(4) { fill: var(--bloom-blush); }
+.couple__bouquet circle:nth-child(5) { fill: var(--bloom-peri); }
 .couple__stem {
   fill: none;
   stroke: var(--sage);
@@ -1024,8 +1100,16 @@ body.is-sealed {
 
 /* Arch vine — leaves and flowers wrapping the hero arch */
 .arch__vine .vine__leaf { stroke: var(--sage); fill: none; stroke-width: 1; }
-.arch__vine .vine__flower > circle:first-child { stroke: var(--accent); fill: none; stroke-width: 1; }
-.arch__vine .vine__flower > circle.dot { fill: var(--accent); stroke: none; }
+
+/* Cycle a colour through the vine so each bloom differs from its neighbour */
+.arch__vine > g                  { --flower-c: var(--accent); }
+.arch__vine > g:nth-of-type(5n+2){ --flower-c: var(--bloom-saffron); }
+.arch__vine > g:nth-of-type(5n+3){ --flower-c: var(--bloom-blush); }
+.arch__vine > g:nth-of-type(5n+4){ --flower-c: var(--bloom-fuchsia); }
+.arch__vine > g:nth-of-type(5n+5){ --flower-c: var(--bloom-peri); }
+
+.arch__vine .vine__flower > circle:first-child { stroke: var(--flower-c); fill: none; stroke-width: 1; }
+.arch__vine .vine__flower > circle.dot { fill: var(--flower-c); stroke: none; }
 
 .arch__vine > g {
   opacity: 0;
