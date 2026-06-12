@@ -65,7 +65,10 @@ function doPost(e) {
     if (!name) return _json({ ok: false, error: 'empty_name' });
 
     const ts = Utilities.formatDate(new Date(), 'Asia/Tbilisi', 'dd.MM.yyyy HH:mm');
-    _sheet().appendRow([ts, name, data.attending, 'web']);
+    const sh = _sheet();
+    sh.insertRowAfter(1); // newest first — add just under the header
+    sh.getRange(2, 1, 1, HEADERS.length).setValues([[ts, name, data.attending, 'web']]);
+    sh.getRange(2, 3).insertCheckboxes();
     return _json({ ok: true });
   } catch (err) {
     console.error(err);
@@ -74,7 +77,7 @@ function doPost(e) {
 }
 
 function doGet() {
-  return _json({ ok: true, service: 'rsvp', version: 3 });
+  return _json({ ok: true, service: 'rsvp', version: 4 });
 }
 
 function _json(body) {
