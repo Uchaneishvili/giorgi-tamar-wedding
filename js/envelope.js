@@ -23,6 +23,13 @@
     overlay.classList.add('is-opening');
     if (btn) btn.setAttribute('aria-disabled', 'true');
 
+    // Burst of petals from the wax seal as it breaks
+    if (typeof window.bloomConfetti === 'function') {
+      const seal = overlay.querySelector('.envelope__seal');
+      const r = (seal || btn).getBoundingClientRect();
+      window.bloomConfetti(r.left + r.width / 2, r.top + r.height / 2, { count: 46 });
+    }
+
     // Reveal timing (ms):
     //   0:    seal fades / scales away (320ms)
     //   ~150: flap rotates up (1200ms)

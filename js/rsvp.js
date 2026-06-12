@@ -87,6 +87,13 @@
       if (result && result.ok) {
         sessionStorage.setItem(SESSION_KEY, JSON.stringify({ name, attending }));
         revealSuccess(name);
+        // Celebrate a "yes" with a petal burst from the confirmation
+        if (attending && typeof window.bloomConfetti === 'function') {
+          requestAnimationFrame(() => {
+            const r = (success || form).getBoundingClientRect();
+            window.bloomConfetti(r.left + r.width / 2, r.top + r.height / 3, { count: 52 });
+          });
+        }
       } else {
         disableButtons(false);
         revealError();
