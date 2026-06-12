@@ -1,6 +1,7 @@
 :root {
   --bg:     #FAFAF7;
   --bg-alt: #F3EFE7;
+  --bg-alt-soft: rgba(240, 234, 224, 0.55); /* translucent alt tone — lets the page mist show through */
   --ink: #0F0F0F;
   --ink-soft: #5C5852;
   --accent: #C97B5C;
@@ -70,6 +71,24 @@ body {
   body { font-size: 16px; }
 }
 
+/* Site-wide ambient mist — a single fixed, low-key wash of the garden palette
+   over the cream base, so the whole page reads as one continuous canvas while
+   the hero keeps the stronger, animated mesh as its peak. Cream stays dominant;
+   the tint is faint enough to preserve text contrast. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(42% 36% at 10% 6%,  color-mix(in oklab, var(--bloom-blush)   20%, transparent), transparent 70%),
+    radial-gradient(38% 34% at 90% 16%, color-mix(in oklab, var(--bloom-fuchsia) 14%, transparent), transparent 70%),
+    radial-gradient(44% 40% at 84% 86%, color-mix(in oklab, var(--bloom-peri)    16%, transparent), transparent 72%),
+    radial-gradient(42% 38% at 8% 94%,  color-mix(in oklab, var(--bloom-saffron) 16%, transparent), transparent 72%);
+}
+@supports not (color: color-mix(in oklab, red, blue)) { body::before { display: none; } }
+
 img, svg { display: block; max-width: 100%; height: auto; }
 
 a {
@@ -95,8 +114,8 @@ section {
 }
 
 .section--alt {
-  background: var(--bg-alt);
-  box-shadow: 0 0 0 100vmax var(--bg-alt);
+  background: var(--bg-alt-soft);
+  box-shadow: 0 0 0 100vmax var(--bg-alt-soft);
   clip-path: inset(0 -100vmax);
 }
 
@@ -139,7 +158,7 @@ section {
    adds an ambient bloom of the section's own tint behind the content. */
 #welcome, #countdown, #events, #rsvp {
   background-image: radial-gradient(72% 58% at 50% 40%,
-    color-mix(in oklab, var(--section-tint) 26%, transparent), transparent 75%);
+    color-mix(in oklab, var(--section-tint) 16%, transparent), transparent 75%);
 }
 @supports not (color: color-mix(in oklab, red, blue)) {
   #welcome, #countdown, #events, #rsvp { background-image: none; }
