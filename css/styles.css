@@ -185,9 +185,62 @@ section {
 }
 
 .hero__kicker,
+.hero__couple,
 .hero__names,
 .hero__date,
 .hero__scrollhint { position: relative; z-index: 1; }
+
+/* ── Hero couple — filled, colourful silhouette framed by the arch ──────── */
+.hero__couple {
+  width: clamp(150px, 23vw, 224px);
+  height: auto;
+  margin-bottom: clamp(-4px, 1vw, 8px);
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  transition: opacity 1000ms var(--ease-out), transform 1000ms var(--ease-out);
+  transition-delay: 1150ms;
+  filter: drop-shadow(0 10px 22px rgba(74, 54, 80, 0.16));
+}
+.hero.is-ready .hero__couple { opacity: 1; transform: none; }
+
+.hc-floor   { fill: rgba(74, 54, 80, 0.10); }
+.hc-veil    { fill: #FFFFFF; opacity: 0.45; }
+.hc-gown    { fill: url(#gownGrad); }
+.hc-suit    { fill: url(#suitGrad); }
+.hc-suit-dark { fill: #463350; }
+.hc-shoe    { fill: #2C2330; }
+.hc-shirt   { fill: #FBF6EE; }
+.hc-skin, .hc-head { fill: #EAC6A0; }
+.hc-hair    { fill: #3E2B22; }
+.hc-tie     { fill: var(--accent); }
+.hc-stem    { stroke: var(--sage); stroke-width: 1.4; fill: none; stroke-linecap: round; }
+.hc-leaf    { stroke: var(--sage); stroke-width: 1.3; fill: none; stroke-linecap: round; }
+.hc-pf { fill: var(--bloom-fuchsia); }
+.hc-ps { fill: var(--bloom-saffron); }
+.hc-pb { fill: var(--bloom-blush); }
+.hc-pp { fill: var(--bloom-peri); }
+.hc-pa { fill: var(--accent); }
+
+/* bouquet blooms pop in after the figures settle */
+.hc-bouquet circle {
+  opacity: 0;
+  transform: scale(0.2);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 400ms var(--ease-out), transform 500ms var(--ease-out);
+}
+.hc-bouquet circle:nth-child(4) { transition-delay: 1700ms; }
+.hc-bouquet circle:nth-child(5) { transition-delay: 1780ms; }
+.hc-bouquet circle:nth-child(6) { transition-delay: 1860ms; }
+.hc-bouquet circle:nth-child(7) { transition-delay: 1940ms; }
+.hc-bouquet circle:nth-child(8) { transition-delay: 2020ms; }
+.hc-bouquet circle:nth-child(9) { transition-delay: 2100ms; }
+.hero.is-ready .hc-bouquet circle { opacity: 1; transform: scale(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__couple { opacity: 1; transform: none; transition: none; }
+  .hc-bouquet circle { opacity: 1; transform: none; transition: none; }
+}
 
 .hero {
   min-height: 100vh;
@@ -199,7 +252,7 @@ section {
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 24px;
+  gap: clamp(12px, 2.2vh, 22px);
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -240,7 +293,7 @@ section {
 .hero__names {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(64px, 14vw, 180px);
+  font-size: clamp(46px, 10vw, 132px);
   line-height: 0.95;
   letter-spacing: -0.02em;
   margin: 0;
