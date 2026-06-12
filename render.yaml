@@ -1,0 +1,19 @@
+# Render Blueprint — static site (no build step).
+# Deploy: Render Dashboard → New → Blueprint → pick this repo.
+services:
+  - type: web
+    name: giorgi-tamar-wedding
+    runtime: static
+    buildCommand: "echo no build step"
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: false
+    headers:
+      - path: /css/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /js/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /image/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
