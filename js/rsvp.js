@@ -1,8 +1,7 @@
 (function () {
   'use strict';
 
-  // PLACEHOLDER — replace with the Apps Script /exec URL after deploy.
-  const APPS_SCRIPT_URL = '__APPS_SCRIPT_URL__';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbywV1ZozWWXjcHGGcD_zZ9RFLLWJjqbQlobZuQ-Nt63oM5xUXuiVXnXN4gJuez6qJ4p/exec';
 
   const SESSION_KEY = 'rsvp-submitted-v1';
 
