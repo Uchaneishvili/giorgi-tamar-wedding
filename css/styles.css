@@ -254,6 +254,27 @@ section {
   .hc-bouquet circle { opacity: 1; transform: none; transition: none; }
 }
 
+/* Shared filled-figure parts reused by the ceremony + toss scenes
+   (same visual language as the hero couple) */
+.hc-robe  { fill: url(#robeGrad); }
+.hc-mitre { fill: url(#mitreGrad); }
+.hc-beard { fill: #CFC8BD; }
+.hc-hand  { fill: #EAC6A0; }
+.hc-stole { fill: color-mix(in oklab, var(--bloom-saffron) 78%, #FFFFFF); opacity: 0.9; }
+@supports not (color: color-mix(in oklab, red, blue)) { .hc-stole { fill: #F0CF8A; } }
+.hc-cross-gold { stroke: var(--bloom-saffron); stroke-width: 2.4; stroke-linecap: round; fill: none; }
+.hc-cross-dark { stroke: #8A5A1E; stroke-width: 2; stroke-linecap: round; fill: none; }
+.scene-bouquet .hc-pf { fill: var(--bloom-fuchsia); }
+.scene-bouquet .hc-ps { fill: var(--bloom-saffron); }
+.scene-bouquet .hc-pb { fill: var(--bloom-blush); }
+.scene-bouquet .hc-pp { fill: var(--bloom-peri); }
+.scene-bouquet .hc-pa { fill: var(--accent); }
+
+.ceremony-scene .hc-cross-gold { animation: priest-cross-glow 3s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .ceremony-scene .hc-cross-gold { animation: none; }
+}
+
 .hero {
   min-height: 100vh;
   min-height: 100svh;
