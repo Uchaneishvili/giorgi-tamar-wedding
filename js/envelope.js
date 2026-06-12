@@ -38,7 +38,7 @@
     //   2500: cleanup — remove overlay from DOM and unlock scroll
     const heroDelay  = prefersReducedMotion ? 250 : 1100;
     const fadeDelay  = prefersReducedMotion ? 400 : 1700;
-    const cleanupMs  = fadeDelay + 800;
+    const cleanupMs  = fadeDelay + (prefersReducedMotion ? 450 : 1050);
 
     setTimeout(() => fireOpened(), heroDelay);
 

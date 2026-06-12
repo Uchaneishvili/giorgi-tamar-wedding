@@ -440,12 +440,35 @@ body.is-sealed {
   display: grid;
   place-items: center;
   padding: 24px;
-  transition: opacity 800ms var(--ease-out), visibility 0ms 800ms;
+  transition: opacity 900ms var(--ease-out), transform 1000ms var(--ease-out),
+              filter 900ms var(--ease-out), visibility 0ms 900ms;
+  will-change: opacity, transform;
 }
+/* As the seal breaks, the cream backdrop blooms into the garden palette —
+   the same hues the hero carries, so the hand-off reads as one continuous
+   wash of colour rather than a hard cut. */
+.envelope-intro::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(58% 52% at 28% 32%, rgba(232, 155, 139, 0.55), transparent 70%),
+    radial-gradient(54% 50% at 76% 38%, rgba(212, 93, 121, 0.42), transparent 70%),
+    radial-gradient(52% 50% at 78% 70%, rgba(123, 166, 201, 0.46), transparent 72%),
+    radial-gradient(66% 58% at 50% 92%, rgba(232, 163, 61, 0.48), transparent 78%);
+  opacity: 0;
+  transition: opacity 1100ms var(--ease-out);
+  filter: blur(8px);
+}
+.envelope-intro.is-opening::after { opacity: 1; }
 .envelope-intro.is-gone {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transform: scale(1.06);
+  filter: blur(6px);
 }
 
 .envelope-intro__stage {
@@ -556,6 +579,8 @@ body.is-sealed {
 
 @media (prefers-reduced-motion: reduce) {
   .envelope-intro { transition: opacity 400ms; }
+  .envelope-intro::after { display: none; }
+  .envelope-intro.is-gone { transform: none; filter: none; }
   .envelope__flap, .envelope__seal { transition: opacity 300ms; }
   .envelope-intro.is-opening .envelope__flap { opacity: 0; transform: none; }
   .envelope-intro.is-opening .envelope__seal { opacity: 0; transform: translate(-50%, -50%); }
