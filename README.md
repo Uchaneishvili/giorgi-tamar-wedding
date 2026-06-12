@@ -15,7 +15,7 @@ Live URL: _set after deploy_
 ```
 index.html              page
 css/                    styles + font imports
-js/                     countdown, RSVP, reveal, music, cursor, main
+js/                     countdown, RSVP, reveal, music, cursor, confetti, petals, sections, main
 image/                  monogram + story photos
 audio/                  ambient.mp3 (background music)
 google-apps-script/     Apps Script files + deploy README
@@ -36,7 +36,7 @@ python3 -m http.server 8000
 3. **Real photos.** Replace placeholder files `image/story-01.webp` through `image/story-04.webp` with the couple's photos (520×650 recommended, WebP preferred, < 100KB each).
 4. **Audio.** Drop the licensed piano track at `audio/ambient.mp3`.
 5. **Story copy.** Update each `.story__chapter` in `index.html` with real chapter titles + paragraphs.
-6. **RSVP deadline.** In `index.html`, find `.rsvp__sub` and replace `1 ივლისი 2026` with the chosen deadline.
+6. **RSVP sub-line.** In `index.html`, `.rsvp__sub` holds the warm invite line (no deadline). Edit if you want different wording.
 7. **Deploy.** Drag the project folder into Netlify Drop (https://app.netlify.com/drop) or `vercel --prod`.
 8. **Smoke test.** Open the deployed URL on mobile, submit a test RSVP, verify a row appears in the sheet.
 
@@ -45,7 +45,7 @@ python3 -m http.server 8000
 | What | Where |
 | --- | --- |
 | Ceremony date/time | `js/countdown.js` — `TARGET` constant |
-| RSVP deadline copy | `index.html` — `.rsvp__sub` |
+| RSVP sub-line copy | `index.html` — `.rsvp__sub` |
 | Apps Script URL | `js/rsvp.js` — `APPS_SCRIPT_URL` |
 | Background music volume | `js/music.js` — `TARGET_VOL` (default 0.3) |
 | Cursor ring on/off | `js/cursor.js` — `FEATURE_FLAG_CURSOR_RING` |

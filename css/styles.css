@@ -1,11 +1,26 @@
 :root {
   --bg:     #FAFAF7;
   --bg-alt: #F3EFE7;
+  --bg-alt-soft: rgba(240, 234, 224, 0.55); /* translucent alt tone — lets the page mist show through */
   --ink: #0F0F0F;
   --ink-soft: #5C5852;
   --accent: #C97B5C;
   --sage:   #7A8B6A;
   --line: #E8E2D8;
+
+  /* ── Blooming-garden palette ─────────────────────────────────────────── */
+  --bloom-saffron: #E8A33D;  /* marigold / saffron */
+  --bloom-blush:   #E89B8B;  /* soft rose */
+  --bloom-fuchsia: #D45D79;  /* magenta petals */
+  --bloom-peri:    #7BA6C9;  /* periwinkle sky */
+  --bloom-plum:    #6B4E71;  /* depth / contrast */
+
+  --grad-warm:  linear-gradient(135deg, var(--accent), var(--bloom-saffron));
+  --grad-bloom: linear-gradient(135deg, var(--bloom-fuchsia), var(--bloom-blush));
+  --grad-fresh: linear-gradient(135deg, var(--sage), var(--bloom-peri));
+
+  /* Active section tint — interpolated as the reader scrolls (set on body) */
+  --section-tint: var(--accent);
 
   --font-display: 'Fraunces', 'Noto Serif Georgian', Georgia, serif;
   --font-body: 'Inter', 'Noto Sans Georgian', system-ui, sans-serif;
@@ -17,8 +32,16 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Registered so the active tint can animate smoothly between sections */
+@property --section-tint {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #C97B5C;
+}
+
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+html { overflow-x: clip; }       /* guard against any stray horizontal scroll on mobile */
 html { -webkit-text-size-adjust: 100%; }
 
 body {
@@ -30,11 +53,41 @@ body {
   font-feature-settings: 'kern', 'liga', 'calt';
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  transition: --section-tint 900ms var(--ease-out);
 }
+
+/* ── Per-section colour identity ──────────────────────────────────────────
+   Each section advertises its tint; an IntersectionObserver (sections.js)
+   lifts the active one onto <body>, so accents that read var(--section-tint)
+   shift hue as the reader travels down the page. */
+#hero      { --section-tint: var(--accent); }
+#welcome   { --section-tint: var(--bloom-blush); }
+#countdown { --section-tint: var(--bloom-saffron); }
+#events    { --section-tint: var(--bloom-peri); }
+#rsvp      { --section-tint: var(--bloom-fuchsia); }
+#footer    { --section-tint: var(--bloom-plum); }
 
 @media (min-width: 768px) {
   body { font-size: 16px; }
 }
+
+/* Site-wide ambient mist — a single fixed, low-key wash of the garden palette
+   over the cream base, so the whole page reads as one continuous canvas while
+   the hero keeps the stronger, animated mesh as its peak. Cream stays dominant;
+   the tint is faint enough to preserve text contrast. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(42% 36% at 10% 6%,  color-mix(in oklab, var(--bloom-blush)   20%, transparent), transparent 70%),
+    radial-gradient(38% 34% at 90% 16%, color-mix(in oklab, var(--bloom-fuchsia) 14%, transparent), transparent 70%),
+    radial-gradient(44% 40% at 84% 86%, color-mix(in oklab, var(--bloom-peri)    16%, transparent), transparent 72%),
+    radial-gradient(42% 38% at 8% 94%,  color-mix(in oklab, var(--bloom-saffron) 16%, transparent), transparent 72%);
+}
+@supports not (color: color-mix(in oklab, red, blue)) { body::before { display: none; } }
 
 img, svg { display: block; max-width: 100%; height: auto; }
 
@@ -61,8 +114,8 @@ section {
 }
 
 .section--alt {
-  background: var(--bg-alt);
-  box-shadow: 0 0 0 100vmax var(--bg-alt);
+  background: var(--bg-alt-soft);
+  box-shadow: 0 0 0 100vmax var(--bg-alt-soft);
   clip-path: inset(0 -100vmax);
 }
 
@@ -93,11 +146,22 @@ section {
 }
 
 .divider-hair {
-  width: 80px;
+  width: 120px;
   height: 1px;
-  background: var(--line);
+  background: linear-gradient(90deg, transparent, var(--section-tint), transparent);
   margin: 32px auto;
   border: 0;
+  opacity: 0.7;
+}
+
+/* Soft colour halo washing each lower section — keeps the cream base,
+   adds an ambient bloom of the section's own tint behind the content. */
+#welcome, #countdown, #events, #rsvp {
+  background-image: radial-gradient(72% 58% at 50% 40%,
+    color-mix(in oklab, var(--section-tint) 16%, transparent), transparent 75%);
+}
+@supports not (color: color-mix(in oklab, red, blue)) {
+  #welcome, #countdown, #events, #rsvp { background-image: none; }
 }
 
 /* Scroll-reveal base state (Task 5 toggles .is-visible) */
@@ -152,9 +216,83 @@ section {
 }
 
 .hero__kicker,
+.hero__couple,
 .hero__names,
 .hero__date,
 .hero__scrollhint { position: relative; z-index: 1; }
+
+/* ── Hero couple — filled, colourful silhouette framed by the arch ──────── */
+.hero__couple {
+  width: clamp(150px, 23vw, 224px);
+  height: auto;
+  margin-bottom: clamp(-4px, 1vw, 8px);
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  transition: opacity 1000ms var(--ease-out), transform 1000ms var(--ease-out);
+  transition-delay: 1150ms;
+  filter: drop-shadow(0 10px 22px rgba(74, 54, 80, 0.16));
+}
+.hero.is-ready .hero__couple { opacity: 1; transform: none; }
+
+.hc-floor   { fill: rgba(74, 54, 80, 0.10); }
+.hc-veil    { fill: #FFFFFF; opacity: 0.45; }
+.hc-gown    { fill: url(#gownGrad); }
+.hc-suit    { fill: url(#suitGrad); }
+.hc-suit-dark { fill: #463350; }
+.hc-shoe    { fill: #2C2330; }
+.hc-shirt   { fill: #FBF6EE; }
+.hc-skin, .hc-head { fill: #EAC6A0; }
+.hc-hair    { fill: #3E2B22; }
+.hc-tie     { fill: var(--accent); }
+.hc-stem    { stroke: var(--sage); stroke-width: 1.4; fill: none; stroke-linecap: round; }
+.hc-leaf    { stroke: var(--sage); stroke-width: 1.3; fill: none; stroke-linecap: round; }
+.hc-pf { fill: var(--bloom-fuchsia); }
+.hc-ps { fill: var(--bloom-saffron); }
+.hc-pb { fill: var(--bloom-blush); }
+.hc-pp { fill: var(--bloom-peri); }
+.hc-pa { fill: var(--accent); }
+
+/* bouquet blooms pop in after the figures settle */
+.hc-bouquet circle {
+  opacity: 0;
+  transform: scale(0.2);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 400ms var(--ease-out), transform 500ms var(--ease-out);
+}
+.hc-bouquet circle:nth-child(4) { transition-delay: 1700ms; }
+.hc-bouquet circle:nth-child(5) { transition-delay: 1780ms; }
+.hc-bouquet circle:nth-child(6) { transition-delay: 1860ms; }
+.hc-bouquet circle:nth-child(7) { transition-delay: 1940ms; }
+.hc-bouquet circle:nth-child(8) { transition-delay: 2020ms; }
+.hc-bouquet circle:nth-child(9) { transition-delay: 2100ms; }
+.hero.is-ready .hc-bouquet circle { opacity: 1; transform: scale(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__couple { opacity: 1; transform: none; transition: none; }
+  .hc-bouquet circle { opacity: 1; transform: none; transition: none; }
+}
+
+/* Shared filled-figure parts reused by the ceremony + toss scenes
+   (same visual language as the hero couple) */
+.hc-robe  { fill: url(#robeGrad); }
+.hc-mitre { fill: url(#mitreGrad); }
+.hc-beard { fill: #CFC8BD; }
+.hc-hand  { fill: #EAC6A0; }
+.hc-stole { fill: color-mix(in oklab, var(--bloom-saffron) 78%, #FFFFFF); opacity: 0.9; }
+@supports not (color: color-mix(in oklab, red, blue)) { .hc-stole { fill: #F0CF8A; } }
+.hc-cross-gold { stroke: var(--bloom-saffron); stroke-width: 2.4; stroke-linecap: round; fill: none; }
+.hc-cross-dark { stroke: #8A5A1E; stroke-width: 2; stroke-linecap: round; fill: none; }
+.scene-bouquet .hc-pf { fill: var(--bloom-fuchsia); }
+.scene-bouquet .hc-ps { fill: var(--bloom-saffron); }
+.scene-bouquet .hc-pb { fill: var(--bloom-blush); }
+.scene-bouquet .hc-pp { fill: var(--bloom-peri); }
+.scene-bouquet .hc-pa { fill: var(--accent); }
+
+.ceremony-scene .hc-cross-gold { animation: priest-cross-glow 3s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .ceremony-scene .hc-cross-gold { animation: none; }
+}
 
 .hero {
   min-height: 100vh;
@@ -166,7 +304,7 @@ section {
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 24px;
+  gap: clamp(12px, 2.2vh, 22px);
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -177,20 +315,22 @@ section {
   inset: -20%;
   z-index: -1;
   background:
-    radial-gradient(55% 50% at 18% 25%, rgba(201, 123, 92, 0.32), transparent 75%),
-    radial-gradient(60% 55% at 82% 65%, rgba(122, 139, 106, 0.28), transparent 75%),
-    radial-gradient(70% 60% at 50% 95%, rgba(232, 192, 168, 0.45), transparent 80%),
-    radial-gradient(50% 45% at 90% 15%, rgba(245, 228, 211, 0.4), transparent 70%);
-  animation: hero-glow 30s ease-in-out infinite alternate;
+    radial-gradient(52% 48% at 16% 22%, rgba(201, 123, 92, 0.34), transparent 72%),
+    radial-gradient(48% 46% at 84% 28%, rgba(212, 93, 121, 0.26), transparent 72%),
+    radial-gradient(50% 50% at 88% 70%, rgba(122, 139, 106, 0.30), transparent 74%),
+    radial-gradient(46% 44% at 22% 78%, rgba(123, 166, 201, 0.28), transparent 72%),
+    radial-gradient(64% 56% at 50% 96%, rgba(232, 163, 61, 0.34), transparent 80%),
+    radial-gradient(40% 38% at 50% 10%, rgba(232, 155, 139, 0.30), transparent 70%);
+  animation: hero-glow 34s ease-in-out infinite alternate;
   pointer-events: none;
   will-change: transform, opacity;
   filter: blur(20px);
 }
 @keyframes hero-glow {
-  0%   { transform: translate(0%, 0%)   scale(1);    }
-  33%  { transform: translate(3%, -2%)  scale(1.08); }
-  66%  { transform: translate(-3%, 2%)  scale(1.04); }
-  100% { transform: translate(2%, 3%)   scale(1.06); }
+  0%   { transform: translate(0%, 0%)   scale(1);    filter: blur(20px) hue-rotate(-8deg); }
+  33%  { transform: translate(3%, -2%)  scale(1.08); filter: blur(20px) hue-rotate(6deg);  }
+  66%  { transform: translate(-3%, 2%)  scale(1.04); filter: blur(20px) hue-rotate(-4deg); }
+  100% { transform: translate(2%, 3%)   scale(1.06); filter: blur(20px) hue-rotate(10deg); }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero::before { animation: none; }
@@ -205,7 +345,7 @@ section {
 .hero__names {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(64px, 14vw, 180px);
+  font-size: clamp(46px, 10vw, 132px);
   line-height: 0.95;
   letter-spacing: -0.02em;
   margin: 0;
@@ -216,9 +356,22 @@ section {
 }
 .hero__amp {
   font-style: italic;
-  color: var(--accent);
+  color: var(--accent); /* fallback */
   font-size: 0.55em;
   line-height: 1;
+  background: linear-gradient(115deg, var(--accent), var(--bloom-fuchsia), var(--bloom-saffron));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: amp-shift 9s ease-in-out infinite alternate;
+}
+@keyframes amp-shift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__amp { animation: none; }
 }
 .hero__name {
   display: inline-block;
@@ -306,12 +459,35 @@ body.is-sealed {
   display: grid;
   place-items: center;
   padding: 24px;
-  transition: opacity 800ms var(--ease-out), visibility 0ms 800ms;
+  transition: opacity 900ms var(--ease-out), transform 1000ms var(--ease-out),
+              filter 900ms var(--ease-out), visibility 0ms 900ms;
+  will-change: opacity, transform;
 }
+/* As the seal breaks, the cream backdrop blooms into the garden palette —
+   the same hues the hero carries, so the hand-off reads as one continuous
+   wash of colour rather than a hard cut. */
+.envelope-intro::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(58% 52% at 28% 32%, rgba(232, 155, 139, 0.55), transparent 70%),
+    radial-gradient(54% 50% at 76% 38%, rgba(212, 93, 121, 0.42), transparent 70%),
+    radial-gradient(52% 50% at 78% 70%, rgba(123, 166, 201, 0.46), transparent 72%),
+    radial-gradient(66% 58% at 50% 92%, rgba(232, 163, 61, 0.48), transparent 78%);
+  opacity: 0;
+  transition: opacity 1100ms var(--ease-out);
+  filter: blur(8px);
+}
+.envelope-intro.is-opening::after { opacity: 1; }
 .envelope-intro.is-gone {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transform: scale(1.06);
+  filter: blur(6px);
 }
 
 .envelope-intro__stage {
@@ -422,6 +598,8 @@ body.is-sealed {
 
 @media (prefers-reduced-motion: reduce) {
   .envelope-intro { transition: opacity 400ms; }
+  .envelope-intro::after { display: none; }
+  .envelope-intro.is-gone { transform: none; filter: none; }
   .envelope__flap, .envelope__seal { transition: opacity 300ms; }
   .envelope-intro.is-opening .envelope__flap { opacity: 0; transform: none; }
   .envelope-intro.is-opening .envelope__seal { opacity: 0; transform: translate(-50%, -50%); }
@@ -459,6 +637,36 @@ body.is-sealed {
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  --cell-c: var(--accent);
+  position: relative;
+}
+.countdown__cell:nth-child(1) { --cell-c: var(--accent); }
+.countdown__cell:nth-child(2) { --cell-c: var(--bloom-saffron); }
+.countdown__cell:nth-child(3) { --cell-c: var(--bloom-blush); }
+.countdown__cell:nth-child(4) { --cell-c: var(--bloom-peri); }
+
+.countdown__cell .countdown__label { color: var(--cell-c); }
+
+/* A small living bloom beneath each unit */
+.countdown__cell::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cell-c);
+  opacity: 0.8;
+  animation: bloom-pulse 2600ms ease-in-out infinite;
+  animation-delay: calc(var(--cd-i, 0) * 320ms);
+}
+.countdown__cell:nth-child(2)::after { --cd-i: 1; }
+.countdown__cell:nth-child(3)::after { --cd-i: 2; }
+.countdown__cell:nth-child(4)::after { --cd-i: 3; }
+@keyframes bloom-pulse {
+  0%, 100% { transform: scale(0.7); opacity: 0.5; }
+  50%      { transform: scale(1);   opacity: 0.9; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .countdown__cell::after { animation: none; }
 }
 .countdown__value {
   font-family: var(--font-display);
@@ -473,13 +681,18 @@ body.is-sealed {
   transform-style: preserve-3d;
 }
 .countdown__value.is-flipping {
-  animation: digit-flip 400ms var(--ease-out);
+  animation: digit-flip 400ms var(--ease-out), digit-tint 400ms var(--ease-out);
 }
 @keyframes digit-flip {
   0%   { transform: rotateX(0deg);  }
   50%  { transform: rotateX(90deg); }
   51%  { transform: rotateX(-90deg); }
   100% { transform: rotateX(0deg);  }
+}
+/* Brief colour bloom as the digit turns, then settle back to ink */
+@keyframes digit-tint {
+  0%, 100% { color: var(--ink); }
+  50%      { color: var(--cell-c); }
 }
 @media (prefers-reduced-motion: reduce) {
   .countdown__value.is-flipping { animation: none; }
@@ -567,6 +780,8 @@ body.is-sealed {
   align-items: center;
 }
 .event__label { margin: 0 0 16px; }
+.event:nth-of-type(1) .event__label { color: var(--accent); }
+.event:nth-of-type(2) .event__label { color: var(--bloom-fuchsia); }
 .event__map { margin-top: auto; }
 .event__time {
   font-size: clamp(48px, 6vw, 72px);
@@ -635,7 +850,7 @@ body.is-sealed {
   color: var(--ink);
   transition: border-color 200ms var(--ease-out);
 }
-.rsvp__input:focus { outline: none; border-color: var(--accent); }
+.rsvp__input:focus { outline: none; border-color: var(--section-tint); }
 .rsvp__help { min-height: 16px; margin: 0; color: var(--accent); text-transform: none; letter-spacing: 0; }
 
 .rsvp__actions {
@@ -659,11 +874,18 @@ body.is-sealed {
   overflow: hidden;
 }
 .btn--solid {
-  background: var(--accent);
-  color: var(--bg);
-  border: 1px solid var(--accent);
+  background: var(--grad-warm);
+  background-size: 180% 180%;
+  background-position: 0% 50%;
+  color: #FFF;
+  border: 1px solid transparent;
+  transition: transform 200ms var(--ease-out), background-position 500ms var(--ease-out),
+              box-shadow 200ms var(--ease-out);
 }
-.btn--solid:hover { background: #b66948; border-color: #b66948; }
+.btn--solid:hover {
+  background-position: 100% 50%;
+  box-shadow: 0 8px 22px rgba(201, 123, 92, 0.28);
+}
 .btn--outline {
   background: transparent;
   color: var(--ink);
@@ -705,7 +927,7 @@ body.is-sealed {
   transform-style: preserve-3d;
 }
 .rsvp__success.is-shown { opacity: 1; transform: rotateX(0deg); }
-.rsvp__check { width: 56px; height: 56px; color: var(--accent); }
+.rsvp__check { width: 56px; height: 56px; color: var(--section-tint); }
 .rsvp__success-title { font-size: clamp(22px, 3vw, 28px); margin: 0; }
 .rsvp__success-body { color: var(--ink-soft); margin: 0; }
 
@@ -793,28 +1015,40 @@ body.is-sealed {
     position: fixed;
     top: 0; left: 0;
     width: 24px; height: 24px;
-    border: 1px solid var(--ink);
+    border: 1.5px solid var(--section-tint);
     border-radius: 50%;
     pointer-events: none;
     transform: translate3d(-50%, -50%, 0);
-    transition: width 200ms var(--ease-out), height 200ms var(--ease-out), opacity 200ms var(--ease-out);
+    transition: width 200ms var(--ease-out), height 200ms var(--ease-out),
+                opacity 200ms var(--ease-out), border-color 600ms var(--ease-out);
     z-index: 9998;
     opacity: 0;
-    mix-blend-mode: difference;
   }
-  .cursor-ring.is-active { opacity: 1; }
-  .cursor-ring.is-hover { width: 40px; height: 40px; }
+  .cursor-ring.is-active { opacity: 0.8; }
+  .cursor-ring.is-hover { width: 40px; height: 40px; opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .cursor-ring { display: none !important; }
 }
 
 /* ─── Ceremony scene (couple + bearded priest) ───────────────────────────── */
+/* Equal-height scene box so the time + venue line up across both cards,
+   regardless of each scene's intrinsic aspect ratio */
+.event__scene {
+  width: 100%;
+  height: clamp(150px, 24vw, 200px);
+  margin: 4px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .ceremony-scene {
   display: block;
-  width: clamp(200px, 38vw, 280px);
+  width: auto;
   height: auto;
-  margin: 4px auto 20px;
+  max-width: 100%;
+  max-height: 100%;
   color: var(--ink);
 }
 .ceremony-scene .priest__line,
@@ -833,8 +1067,8 @@ body.is-sealed {
   stroke-linejoin: round;
 }
 .ceremony-scene .priest__cross {
-  stroke: var(--accent);
-  stroke-width: 1.2;
+  stroke: var(--bloom-saffron);
+  stroke-width: 1.3;
   animation: priest-cross-glow 3s ease-in-out infinite;
 }
 .ceremony-scene .priest__hand {
@@ -853,38 +1087,35 @@ body.is-sealed {
 /* ─── Bouquet toss scene (inside Wedding event card) ─────────────────────── */
 .toss-scene {
   display: block;
-  width: clamp(220px, 40vw, 320px);
+  width: auto;
   height: auto;
-  margin: 4px auto 20px;
+  max-width: 100%;
+  max-height: 100%;
   color: var(--ink);
   overflow: visible;
 }
-.toss-scene * {
+.toss-scene .toss__ground {
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.1;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.toss__ground {
   stroke-width: 0.8;
   stroke-dasharray: 2 6;
-  opacity: 0.25;
+  stroke-linecap: round;
+  opacity: 0.3;
 }
-.toss__veil {
-  stroke-width: 0.9;
-  opacity: 0.4;
-}
-.toss__hand {
-  fill: currentColor;
-  stroke: none;
-  opacity: 0.7;
-}
+/* coloured guest gowns (filled, hero-style) */
+.cat-gown-a { fill: #E59AAE; }
+.cat-gown-b { fill: #9CC0DC; }
+.cat-gown-c { fill: #EEC07E; }
 .toss__petal {
   fill: var(--accent);
   stroke: none;
   opacity: 0.9;
 }
+.toss__petal:nth-of-type(2) { fill: var(--bloom-fuchsia); }
+.toss__petal:nth-of-type(3) { fill: var(--bloom-saffron); }
+.toss__petal:nth-of-type(4) { fill: var(--bloom-blush); }
+.toss__petal:nth-of-type(5) { fill: var(--bloom-peri); }
+.toss__petal:nth-of-type(6) { fill: var(--bloom-fuchsia); }
 .toss__leaf {
   stroke: var(--sage);
   stroke-width: 0.9;
@@ -933,8 +1164,12 @@ body.is-sealed {
 .couple__bouquet circle {
   fill: var(--accent);
   stroke: none;
-  opacity: 0.85;
+  opacity: 0.9;
 }
+.couple__bouquet circle:nth-child(2) { fill: var(--bloom-fuchsia); }
+.couple__bouquet circle:nth-child(3) { fill: var(--bloom-saffron); }
+.couple__bouquet circle:nth-child(4) { fill: var(--bloom-blush); }
+.couple__bouquet circle:nth-child(5) { fill: var(--bloom-peri); }
 .couple__stem {
   fill: none;
   stroke: var(--sage);
@@ -966,7 +1201,7 @@ body.is-sealed {
   width: 96px;
   height: auto;
   margin: 32px auto;
-  color: var(--accent);
+  color: var(--section-tint);
   opacity: 0;
   transition: opacity 700ms var(--ease-out);
 }
@@ -982,7 +1217,7 @@ body.is-sealed {
   width: clamp(120px, 18vw, 180px);
   height: auto;
   margin: -40px auto clamp(56px, 8vw, 88px);
-  color: var(--accent);
+  color: var(--section-tint);
   opacity: 0;
   transition: opacity 800ms var(--ease-out);
 }
@@ -1016,6 +1251,11 @@ body.is-sealed {
   .hero__sprig { width: 50px; }
   .hero__sprig--tl { top: 20px; left: 20px; }
   .hero__sprig--br { bottom: 20px; right: 20px; }
+
+  /* tighter hero rhythm so couple + names + date sit comfortably on phones */
+  .hero { gap: clamp(10px, 1.8vh, 16px); }
+  .hero__couple { width: clamp(118px, 34vw, 160px); margin-bottom: 2px; }
+  .hero__names { font-size: clamp(40px, 11vw, 66px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1024,8 +1264,16 @@ body.is-sealed {
 
 /* Arch vine — leaves and flowers wrapping the hero arch */
 .arch__vine .vine__leaf { stroke: var(--sage); fill: none; stroke-width: 1; }
-.arch__vine .vine__flower > circle:first-child { stroke: var(--accent); fill: none; stroke-width: 1; }
-.arch__vine .vine__flower > circle.dot { fill: var(--accent); stroke: none; }
+
+/* Cycle a colour through the vine so each bloom differs from its neighbour */
+.arch__vine > g                  { --flower-c: var(--accent); }
+.arch__vine > g:nth-of-type(5n+2){ --flower-c: var(--bloom-saffron); }
+.arch__vine > g:nth-of-type(5n+3){ --flower-c: var(--bloom-blush); }
+.arch__vine > g:nth-of-type(5n+4){ --flower-c: var(--bloom-fuchsia); }
+.arch__vine > g:nth-of-type(5n+5){ --flower-c: var(--bloom-peri); }
+
+.arch__vine .vine__flower > circle:first-child { stroke: var(--flower-c); fill: none; stroke-width: 1; }
+.arch__vine .vine__flower > circle.dot { fill: var(--flower-c); stroke: none; }
 
 .arch__vine > g {
   opacity: 0;
@@ -1063,6 +1311,34 @@ body.is-sealed {
 .hero__sprig .leaf,
 .footer__branch .leaf {
   stroke: var(--sage);
+}
+
+/* ── Colourful blooms on the remaining line ornaments ─────────────────── */
+/* Hero corner sprigs — petals + centre get garden hues */
+.hero__sprig--tl ellipse { fill: var(--bloom-blush);  stroke: var(--bloom-blush); }
+.hero__sprig--tl > circle { fill: var(--bloom-fuchsia); }
+.hero__sprig--br ellipse { fill: var(--bloom-saffron); stroke: var(--bloom-saffron); }
+.hero__sprig--br > circle { fill: var(--bloom-peri); }
+.hero.is-ready .hero__sprig { opacity: 0.7; }
+@media (prefers-reduced-motion: reduce) { .hero__sprig { opacity: 0.7; } }
+
+/* Footer branch tips bloom in colour */
+.footer__branch--left  circle { fill: var(--bloom-fuchsia); }
+.footer__branch--right circle { fill: var(--bloom-saffron); }
+
+/* Bouquet-toss catchers become three colourful guests */
+.toss-scene > g:nth-of-type(3) { color: var(--bloom-fuchsia); }
+.toss-scene > g:nth-of-type(4) { color: var(--bloom-peri); }
+.toss-scene > g:nth-of-type(5) { color: var(--bloom-saffron); }
+
+/* Ceremony couple gains warmth — skin, hair, tinted attire */
+.ceremony-scene .couple__head { fill: #EAC6A0; }
+.ceremony-scene .couple__hair { fill: #3E2B22; stroke: #3E2B22; }
+.ceremony-scene .couple__dress  { fill: color-mix(in oklab, var(--bloom-blush) 42%, transparent); }
+.ceremony-scene .couple__jacket { fill: color-mix(in oklab, var(--bloom-plum) 38%, transparent); }
+@supports not (color: color-mix(in oklab, red, blue)) {
+  .ceremony-scene .couple__dress  { fill: #F3D7D0; }
+  .ceremony-scene .couple__jacket { fill: #C9BBD0; }
 }
 
 @media (max-width: 480px) {
