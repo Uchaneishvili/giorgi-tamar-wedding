@@ -66,6 +66,19 @@
       <svg class="hero__arch" viewBox="0 0 200 320" aria-hidden="true"
            fill="none" stroke="currentColor" stroke-width="1.2"
            stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <symbol id="rose" viewBox="0 0 14 14">
+            <g class="rose-petal">
+              <ellipse cx="7" cy="3.9" rx="2.3" ry="3.1" />
+              <ellipse cx="7" cy="3.9" rx="2.3" ry="3.1" transform="rotate(72 7 7)" />
+              <ellipse cx="7" cy="3.9" rx="2.3" ry="3.1" transform="rotate(144 7 7)" />
+              <ellipse cx="7" cy="3.9" rx="2.3" ry="3.1" transform="rotate(216 7 7)" />
+              <ellipse cx="7" cy="3.9" rx="2.3" ry="3.1" transform="rotate(288 7 7)" />
+            </g>
+            <circle class="rose-center" cx="7" cy="7" r="2.6" />
+            <path class="rose-swirl" d="M7 7 C7 5.8 8.7 5.8 8.7 7 C8.7 8.9 5.3 8.9 5.3 7 C5.3 4.6 9.7 4.6 9.7 7" />
+          </symbol>
+        </defs>
         <path class="arch__line" d="M 10 320 L 10 100 Q 10 10, 100 10 Q 190 10, 190 100 L 190 320" />
         <g class="arch__vine">
           <g class="vine__leaf" style="--i:0"><path d="M 10 295 Q 4 290, 0 285 Q 6 295, 10 295" /></g>
@@ -95,26 +108,26 @@
           <g class="vine__leaf" style="--i:24"><path d="M 190 295 Q 196 290, 200 285 Q 194 295, 190 295" /></g>
 
           <!-- white roses climbing the arch (same pop-in animation) -->
-          <g class="vine__rose" style="--i:1"><circle class="rose-o" cx="10" cy="288" r="3.6"/><circle class="rose-i" cx="10" cy="288" r="2.2"/><circle class="rose-c" cx="10" cy="288" r="0.9"/></g>
-          <g class="vine__rose" style="--i:3"><circle class="rose-o" cx="10" cy="256" r="3.6"/><circle class="rose-i" cx="10" cy="256" r="2.2"/><circle class="rose-c" cx="10" cy="256" r="0.9"/></g>
-          <g class="vine__rose" style="--i:5"><circle class="rose-o" cx="10" cy="224" r="3.6"/><circle class="rose-i" cx="10" cy="224" r="2.2"/><circle class="rose-c" cx="10" cy="224" r="0.9"/></g>
-          <g class="vine__rose" style="--i:7"><circle class="rose-o" cx="10" cy="192" r="3.6"/><circle class="rose-i" cx="10" cy="192" r="2.2"/><circle class="rose-c" cx="10" cy="192" r="0.9"/></g>
-          <g class="vine__rose" style="--i:9"><circle class="rose-o" cx="10" cy="160" r="3.6"/><circle class="rose-i" cx="10" cy="160" r="2.2"/><circle class="rose-c" cx="10" cy="160" r="0.9"/></g>
-          <g class="vine__rose" style="--i:11"><circle class="rose-o" cx="11" cy="128" r="3.6"/><circle class="rose-i" cx="11" cy="128" r="2.2"/><circle class="rose-c" cx="11" cy="128" r="0.9"/></g>
-          <g class="vine__rose" style="--i:13"><circle class="rose-o" cx="18" cy="62" r="3.6"/><circle class="rose-i" cx="18" cy="62" r="2.2"/><circle class="rose-c" cx="18" cy="62" r="0.9"/></g>
-          <g class="vine__rose" style="--i:15"><circle class="rose-o" cx="34" cy="34" r="3.6"/><circle class="rose-i" cx="34" cy="34" r="2.2"/><circle class="rose-c" cx="34" cy="34" r="0.9"/></g>
-          <g class="vine__rose" style="--i:17"><circle class="rose-o" cx="62" cy="17" r="3.6"/><circle class="rose-i" cx="62" cy="17" r="2.2"/><circle class="rose-c" cx="62" cy="17" r="0.9"/></g>
-          <g class="vine__rose" style="--i:19"><circle class="rose-o" cx="88" cy="11" r="3.6"/><circle class="rose-i" cx="88" cy="11" r="2.2"/><circle class="rose-c" cx="88" cy="11" r="0.9"/></g>
-          <g class="vine__rose" style="--i:19"><circle class="rose-o" cx="112" cy="11" r="3.6"/><circle class="rose-i" cx="112" cy="11" r="2.2"/><circle class="rose-c" cx="112" cy="11" r="0.9"/></g>
-          <g class="vine__rose" style="--i:17"><circle class="rose-o" cx="138" cy="17" r="3.6"/><circle class="rose-i" cx="138" cy="17" r="2.2"/><circle class="rose-c" cx="138" cy="17" r="0.9"/></g>
-          <g class="vine__rose" style="--i:15"><circle class="rose-o" cx="166" cy="34" r="3.6"/><circle class="rose-i" cx="166" cy="34" r="2.2"/><circle class="rose-c" cx="166" cy="34" r="0.9"/></g>
-          <g class="vine__rose" style="--i:13"><circle class="rose-o" cx="182" cy="62" r="3.6"/><circle class="rose-i" cx="182" cy="62" r="2.2"/><circle class="rose-c" cx="182" cy="62" r="0.9"/></g>
-          <g class="vine__rose" style="--i:11"><circle class="rose-o" cx="189" cy="128" r="3.6"/><circle class="rose-i" cx="189" cy="128" r="2.2"/><circle class="rose-c" cx="189" cy="128" r="0.9"/></g>
-          <g class="vine__rose" style="--i:9"><circle class="rose-o" cx="190" cy="160" r="3.6"/><circle class="rose-i" cx="190" cy="160" r="2.2"/><circle class="rose-c" cx="190" cy="160" r="0.9"/></g>
-          <g class="vine__rose" style="--i:7"><circle class="rose-o" cx="190" cy="192" r="3.6"/><circle class="rose-i" cx="190" cy="192" r="2.2"/><circle class="rose-c" cx="190" cy="192" r="0.9"/></g>
-          <g class="vine__rose" style="--i:5"><circle class="rose-o" cx="190" cy="224" r="3.6"/><circle class="rose-i" cx="190" cy="224" r="2.2"/><circle class="rose-c" cx="190" cy="224" r="0.9"/></g>
-          <g class="vine__rose" style="--i:3"><circle class="rose-o" cx="190" cy="256" r="3.6"/><circle class="rose-i" cx="190" cy="256" r="2.2"/><circle class="rose-c" cx="190" cy="256" r="0.9"/></g>
-          <g class="vine__rose" style="--i:1"><circle class="rose-o" cx="190" cy="288" r="3.6"/><circle class="rose-i" cx="190" cy="288" r="2.2"/><circle class="rose-c" cx="190" cy="288" r="0.9"/></g>
+          <g class="vine__rose" style="--i:1"><use href="#rose" x="5" y="283" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:3"><use href="#rose" x="5" y="251" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:5"><use href="#rose" x="5" y="219" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:7"><use href="#rose" x="5" y="187" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:9"><use href="#rose" x="5" y="155" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:11"><use href="#rose" x="6" y="123" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:13"><use href="#rose" x="13" y="57" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:15"><use href="#rose" x="29" y="29" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:17"><use href="#rose" x="57" y="12" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:19"><use href="#rose" x="83" y="6" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:19"><use href="#rose" x="107" y="6" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:17"><use href="#rose" x="133" y="12" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:15"><use href="#rose" x="161" y="29" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:13"><use href="#rose" x="177" y="57" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:11"><use href="#rose" x="184" y="123" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:9"><use href="#rose" x="185" y="155" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:7"><use href="#rose" x="185" y="187" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:5"><use href="#rose" x="185" y="219" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:3"><use href="#rose" x="185" y="251" width="10" height="10"/></g>
+          <g class="vine__rose" style="--i:1"><use href="#rose" x="185" y="283" width="10" height="10"/></g>
         </g>
       </svg>
       <svg class="hero__sprig hero__sprig--tl" viewBox="0 0 60 60" aria-hidden="true"
